@@ -8,25 +8,34 @@
 <body>
     <h1>Formulaire de mise en adoption</h1>
     <p>Remplissez le formulaire ci-dessous pour mettre votre animal en adoption</p>
-    <form action="/submit_form" method="post">
-        <label for="nom">Nom de l'animal de compagnie :</label><br>
-        <input type="text" id="nom" name="nom"><br>
-        <label for="espece">Espece :</label><br>
-        <input type="text" id="espece" name="espece"><br>
-        <label for="race">Race :</label><br>
-        <input type="text" id="race" name="race"><br>
-        <label for="age">Age :</label><br>
-        <input type="text" id="age" name="age"><br>
-        <label for="description">Description :</label><br>
-        <input type="text" id="description" name="description"><br>
-        <label for="email">Email:</label><br>
-        <input type="email" id="courriel" name="courriel"><br>
-        <label for="adresse">Adresse :</label><br>
-        <input type="text" id="age" name="age"><br>
-        <label for="ville">Ville :</label><br>
-        <input type="text" id="ville" name="ville"><br>
-        <label for="cp">Code postal :</label><br>
-        <input type="text" id="cp" name="cp"><br>
+    <form action="/submit_form" method="post" onsubmit="validateForm()">
+        <label for="nom">Nom de l'animal de compagnie :</label>
+        <input type="text" id="nom" name="nom">
+        <div id="name-error"></div>
+        <label for="espece">Espece :</label>
+        <input type="text" id="espece" name="espece">
+        <div id="espece-error"></div>
+        <label for="race">Race :</label>
+        <input type="text" id="race" name="race">
+        <div id="race-error"></div>
+        <label for="age">Age :</label>
+        <input type="text" id="age" name="age">
+        <div id="age-error"></div>
+        <label for="description">Description :</label>
+        <input type="text" id="description" name="description">
+        <div id="description-error"></div>
+        <label for="email">Email:</label>
+        <input type="email" id="courriel" name="courriel">
+        <div id="courriel-error"></div>
+        <label for="adresse">Adresse :</label>
+        <input type="text" id="adresse" name="adresse">
+        <div id="adresse-error"></div>
+        <label for="ville">Ville :</label>
+        <input type="text" id="ville" name="ville">
+        <div id="ville-error"></div>
+        <label for="cp">Code postal :</label>
+        <input type="text" id="cp" name="cp">
+        <div id="cp-error"></div>
         <br>
         <input type="submit" value="Submit">
     </form>
