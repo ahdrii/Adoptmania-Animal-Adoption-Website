@@ -6,7 +6,7 @@ window.addEventListener("load", function () {
     const ageInput = document.getElementById("age");
     const descriptionInput = document.getElementById("description");
     const courrielInput = document.getElementById("courriel");
-    const AdresseInput = document.getElementById("adresse");
+    const adresseInput = document.getElementById("adresse");
     const villeInput = document.getElementById("ville");
     const codePostalInput = document.getElementById("code-postal");
 
@@ -16,612 +16,632 @@ window.addEventListener("load", function () {
     const ageError = document.getElementById("age-error");
     const descriptionError = document.getElementById("description-error");
     const courrielError = document.getElementById("courriel-error");
-    const AdresseError = document.getElementById("adresse-error");
+    const adresseError = document.getElementById("adresse-error");
     const villeError = document.getElementById("ville-error");
     const codePostalError = document.getElementById("code-postal-error");
 
-    const resetButton = document.getElementById("resetButton");
     const submitButton = document.getElementById("submit-button");
 
+    //es KAKA
+    // let myCities = ["Montreal", "Québec", "Laval", "Gatineau", "Longueuil", "Sherbrooke", "Lévis", "Saguenay",
+    //     "Trois-Rivières", "Terrebonne", "Saint-Jean-sur-Richelieu", "Brossard", "Repentigny", "Saint-Jérôme",
+    //     Drummondville, Granby, Mirabel, Blainville, Saint-Hyacinthe, Mascouche, Châteauguay, Shawinigan, Rimouski
+    //     Dollard-Des Ormeaux, Victoriaville, Saint-Eustache,Salaberry-de-Valleyfield, Vaudreuil-Dorion	, Rouyn-Noranda	,
+    //     Boucherville, Sorel-Tracy, Côte-Saint-Luc, Saint-Georges	, Pointe-Claire	, Val-d'or,  Chambly	, Alma	,
+    //     Sainte-Julie	, Saint-Constant	, Magog	, Boisbriand	, Saint-Bruno-de-Montarville	,Sainte-Thérèse	
+    //     , La Prairie	,Thetford Mines	,Sept-Îles	, Belœil	, L'Assomption	, Saint-Lambert	, Varennes	, Joliette"
+    // ];
     //******************************************
     //**            EVENT LISTENERS           **
     //******************************************
 
     //!!!!!!!!!!COPIA Y PEGA DE MI TP2, YA LO ARREGLARE LUEGO XD PERO LAS CONSTANTES YA ESTAN DECLARADAS!!!!!!!!!!
 
-//     resetButton.style.display = 'none'; 
-//     resetButton.addEventListener('click', function() {
-//         clearErrorMessages();
-//         enableInputs([genreSelect, naissanceInput, voitureInput, anneeInput, kiloInput, cameraSelect, reclamationSelect,
-//             reclamationNumbers, oneReclamation, twoReclamation, threeReclamation, fourReclamation, submitButton]);
-//         clearErrorMessage(showAnnualRate);
-//         clearErrorMessage(showMonthlyRate);
-//         defaultDiv();
-//         resetButton.style.display = 'none'; // Hide the reset button
-//     })
 
-//         //we have the reclamation inputs, need MONTANT BASE, NBR RECLAMATION, KILOMETRES
-//         submitButton.addEventListener('click', function() {
-//             let totalReclamations = checkOverload(oneReclamation, twoReclamation, threeReclamation, fourReclamation, totalReclamationError);
-//                 let myKilo = Number(kiloInput.value); //kilometrage de user 
-//                 let mynumberReclamation = getNbrReclamation(reclamationNumbers, reclamationSelect); //nbr de reclamation de user
-//                 let mybaseRate = getbaseRate(genreSelect,naissanceInput,voitureInput); //base rate de user
-//                 let myAnnualRate = calculateAnnualRate(mybaseRate, mynumberReclamation, myKilo, totalReclamations); //annual rate de user
-//                 let myMonthlyRate = calculateMonthlyRate(myAnnualRate); //monthly rate de user   
-//             if (checkFilled() === true) {         
-//                 displayErrorMessage(myAnnualRate, showAnnualRate); 
-//                 displayErrorMessage(myMonthlyRate, showMonthlyRate);
-//                 resetButton.style.display = 'block';
-//             }
-//         });
+        //we have the reclamation inputs, need MONTANT BASE, NBR RECLAMATION, KILOMETRES
+        submitButton.addEventListener('click', function() {
+            let totalReclamations = checkOverload(oneReclamation, twoReclamation, threeReclamation, fourReclamation, totalReclamationError);
+                let myKilo = Number(kiloInput.value); //kilometrage de user 
+                let mynumberReclamation = getNbrReclamation(reclamationNumbers, reclamationSelect); //nbr de reclamation de user
+                let mybaseRate = getbaseRate(genreSelect,naissanceInput,voitureInput); //base rate de user
+                let myAnnualRate = calculateAnnualRate(mybaseRate, mynumberReclamation, myKilo, totalReclamations); //annual rate de user
+                let myMonthlyRate = calculateMonthlyRate(myAnnualRate); //monthly rate de user   
+            if (checkFilled() === true) {         
+                displayErrorMessage(myAnnualRate, showAnnualRate); 
+                displayErrorMessage(myMonthlyRate, showMonthlyRate);
+                resetButton.style.display = 'block';
+            }
+        });
     
 
 
-//     // CHECK GENRE
-//     genreSelect.addEventListener('change', function() {
-//         let validation = validateNaissance(naissanceInput, genreSelect);
-//         if (!validation.isValid) {
-//             displayErrorMessage(validation.errorMessage, naissanceError);
-//             if (validation.errorMessage === "Désolé, nous n'avons aucun produit à offrir pour ce profil de client") {
-//                 disableInputs([genreSelect, naissanceInput, voitureInput, anneeInput, kiloInput, cameraSelect, reclamationSelect,
-//                     reclamationNumbers, oneReclamation, twoReclamation, threeReclamation, fourReclamation, submitButton]);
-//             }
-//         } else {
-//             clearErrorMessage(naissanceError);
-//         }
-//     });
+    // CHECK NAME    • Le nom de l'animal doit avoir entre 3 et 20 caractères.
+    nameInput.addEventListener('change', function() {
+        let validation = validateName(nameInput);
+        if (!validation.isValid) {
+            displayErrorMessage("Le nom de l'animal doit avoir entre 3 et 20 caractères sans virgule.", nameError);
+            submitButton.disabled = true;
+        } else {
+            clearErrorMessage(especeError);
+            submitButton.disabled = false;
+        }
+    });
 
-//     // CHECK DATE DE NAISSANCE
-//     naissanceInput.addEventListener('change', function() {
-//         let validation = validateNaissance(naissanceInput, genreSelect);
-//         if (!validation.isValid) {
-//             displayErrorMessage(validation.errorMessage, naissanceError);
-//             if (validation.errorMessage === "Désolé, nous n'avons aucun produit à offrir pour ce profil de client") {
-//                 disableInputs([genreSelect, naissanceInput, voitureInput, anneeInput, kiloInput, cameraSelect, reclamationSelect, 
-//                     reclamationNumbers, oneReclamation, twoReclamation, threeReclamation, fourReclamation, submitButton]);
-//             }
-//         } else {
-//             clearErrorMessage(naissanceError);
-//         }
-//     });
-
-//     // //CHECK VOITURE
-//     voitureInput.addEventListener('change', function() {
-//         let validation = validateVoiture(voitureInput);
-//         if (!validation.isValid) {
-//             displayErrorMessage(validation.errorMessage, voitureError);
-//             if (validation.errorMessage === "Désolé, nous n'avons aucun produit à offrir pour ce profil de client") {
-//                 disableInputs([genreSelect, naissanceInput, voitureInput, anneeInput, kiloInput, cameraSelect, reclamationSelect,
-//                     reclamationNumbers, oneReclamation, twoReclamation, threeReclamation, fourReclamation, submitButton]);
-//             }
-//         }
-//         else {
-//             clearErrorMessage(voitureError);
-//         }
-//     });
-
-//     //CHECK ANNEE
-//     anneeInput.addEventListener('change', function() {
-//         const validation = validateAnnee(anneeInput, anneeError);
-//         if (!validation.isValid && validation.errorMessage === "Désolé, nous n'avons aucun produit à offrir pour ce profil de client") {
-//             disableInputs([genreSelect, naissanceInput, voitureInput, anneeInput, kiloInput, cameraSelect, reclamationSelect,
-//                 reclamationNumbers, oneReclamation, twoReclamation, threeReclamation, fourReclamation, submitButton]);
-//         }
-//     });
-
-//     //CHECK KILO
-//     kiloInput.addEventListener('change', function() {
-//         const validation = validateKilo(kiloInput, kiloError);
-//         if (!validation.isValid && validation.errorMessage === "Désolé, nous n'avons aucun produit à offrir pour ce profil de client") {
-//             disableInputs([genreSelect, naissanceInput, voitureInput, anneeInput, kiloInput, cameraSelect, reclamationSelect,
-//                 reclamationNumbers, oneReclamation, twoReclamation, threeReclamation, fourReclamation, submitButton]);
-//         }
-//     });
+    function validateName(nameInput) {
+        if (nameInput.includes(",")) {
+            return false;
+        }
+        if (nameInput.value.length <= 3 && nameInput.value.length >= 20) {
+            return true;
+        }
+        return false;
+    }
 
 
-//     //CHECK CAMERA
-//     cameraSelect.addEventListener('change', function() {
-//         const validation = validateCamera(cameraSelect, cameraError);
-//         if (!validation.isValid && validation.errorMessage === "Désolé, nous n'avons aucun produit à offrir pour ce profil de client") {
-//             disableInputs([genreSelect, naissanceInput, voitureInput, anneeInput, kiloInput, cameraSelect, reclamationSelect,
-//                 reclamationNumbers, oneReclamation, twoReclamation, threeReclamation, fourReclamation, submitButton]);
-//         }
-//     });
+    // CHECK ESPECE
+    especeInput.addEventListener('change', function() {
+        let validation = validateEspece(especeInput);
+        if (!validation.isValid) {
+            displayErrorMessage("L'entrée est invalide", especeError);
+            submitButton.disabled = true;
+        } else {
+            clearErrorMessage(especeError);
+            submitButton.disabled = false;
+        }
+    });
 
-//     //CHECK RECLAMATION
-//     reclamationSelect.addEventListener('change', function() {
-//         if (reclamationSelect.value === "oui-reclamation") {
-//             showDivReclamation();
-//             showDivQuestion1();
-//         } else {
-//             resetValues(oneReclamation,twoReclamation,threeReclamation,fourReclamation,totalReclamationError);
-//             defaultDiv();
-//         }
-//     });
-
-
-//     // CHECK NUMBER RECLAMATION (desole)
-//     reclamationNumbers.addEventListener('change', function() {
-//         if (reclamationNumbers.value === "une-reclamation") {
-//             resetValues(oneReclamation,twoReclamation,threeReclamation,fourReclamation);
-//             clearErrorMessage(numberReclamationError);
-//             clearErrorMessage(oneReclamationError);
-//             clearErrorMessage(twoReclamationError);
-//             clearErrorMessage(threeReclamationError);
-//             clearErrorMessage(fourReclamationError);
-//             defaultDiv();
-//             showDivReclamation();
-//             showDivQuestion1();
-//         } else if (reclamationNumbers.value === "deux-reclamation") {
-//             resetValues(oneReclamation,twoReclamation,threeReclamation,fourReclamation);
-//             clearErrorMessage(numberReclamationError);
-//             clearErrorMessage(oneReclamationError);
-//             clearErrorMessage(twoReclamationError);
-//             clearErrorMessage(threeReclamationError);
-//             clearErrorMessage(fourReclamationError);
-//             defaultDiv();
-//             showDivReclamation();
-//             showDivQuestion1();
-//             showDivQuestion2();
-//         } else if (reclamationNumbers.value === "trois-reclamation") {
-//             resetValues(oneReclamation,twoReclamation,threeReclamation,fourReclamation);
-//             clearErrorMessage(numberReclamationError);
-//             clearErrorMessage(oneReclamationError);
-//             clearErrorMessage(twoReclamationError);
-//             clearErrorMessage(threeReclamationError);
-//             clearErrorMessage(fourReclamationError);
-//             defaultDiv();
-//             showDivReclamation();
-//             showDivQuestion1();
-//             showDivQuestion2();
-//             showDivQuestion3();
-//         } else if (reclamationNumbers.value === "quattre-reclamation") {
-//             resetValues(oneReclamation,twoReclamation,threeReclamation,fourReclamation);
-//             clearErrorMessage(numberReclamationError);
-//             clearErrorMessage(oneReclamationError);
-//             clearErrorMessage(twoReclamationError);
-//             clearErrorMessage(threeReclamationError);
-//             clearErrorMessage(fourReclamationError);
-//             defaultDiv();
-//             showDivReclamation();
-//             showDivQuestion1();
-//             showDivQuestion2();
-//             showDivQuestion3();
-//             showDivQuestion4();
-//         } else if (reclamationNumbers.value === "cinq-reclamation") {
-//             resetValues(oneReclamation,twoReclamation,threeReclamation,fourReclamation);
-//             clearErrorMessage(numberReclamationError);
-//             clearErrorMessage(oneReclamationError);
-//             clearErrorMessage(twoReclamationError);
-//             clearErrorMessage(threeReclamationError);
-//             clearErrorMessage(fourReclamationError);
-//             defaultDiv();
-//             showDivReclamation();
-//             displayErrorMessage("Désolé, nous n'avons aucun produit à offrir pour ce profil de client", numberReclamationError);
-//             disableInputs([genreSelect, naissanceInput, voitureInput, anneeInput, kiloInput, cameraSelect,
-//                 reclamationSelect, reclamationNumbers, oneReclamation, twoReclamation, threeReclamation, fourReclamation, submitButton]);
-//         } 
-
-//     })
+    function validateEspece(especeInput) {
+        if (especeInput.includes(",")) {
+            return false;
+        }
+        return true;
+    }
 
 
-//     function checkReclamation(reclamation, reclamationError, reclamationNumber) {
-//         reclamation.addEventListener('change', function() {
-//             const validation = validateReclamationInput(reclamation, reclamationError, reclamationNumber);
-//             const myOverload = checkOverload(oneReclamation, twoReclamation, threeReclamation, fourReclamation, totalReclamationError);
-//             if (!validation.isValid && validation.errorMessage === "Désolé, nous n'avons aucun produit à offrir pour ce profil de client") {
-//                 disableInputs([genreSelect, naissanceInput, voitureInput, anneeInput, kiloInput, cameraSelect,
-//                     reclamationSelect, reclamationNumbers, oneReclamation, twoReclamation, threeReclamation, fourReclamation]);
-//             } else if (validation.isValid) {
-//                 if (myOverload ===false){
-//                     disableInputs([genreSelect, naissanceInput, voitureInput, anneeInput, kiloInput,
-//                         cameraSelect, reclamationSelect, reclamationNumbers, oneReclamation, twoReclamation, threeReclamation, fourReclamation, submitButton]);
-//                 }
-//             }
-//         });
-//     }
+
+    //CHECK RACE
     
-//     //CHECK RECLAMATION 1
-//     checkReclamation(oneReclamation, oneReclamationError, 1);
+    raceInput.addEventListener('change', function() {
+        let validation = validateRace(raceInput);
+        if (!validation.isValid) {
+            displayErrorMessage("L'entrée est invalide", raceError);
+            submitButton.disabled = true;
+        } else {
+            clearErrorMessage(raceError);
+            submitButton.disabled = false;
+        }
+    });
+
+    function validateRace(raceInput) {
+        if (raceInput.includes(",")) {
+            return false;
+        }
+        return true;
+    }
+
+
+    //CHECK AGE • L'âge doit être une valeur numérique entre 0 et 30.
+
+    ageInput.addEventListener('change', function() {
+        let validation = validateAge(ageInput);
+        if (!validation.isValid) {
+            displayErrorMessage("L'entree de l'age doit etre un chiffre entre 0 et 30.", ageError); 
+            submitButton.disabled = true;
+        } else {
+            clearErrorMessage(ageError);
+            submitButton.disabled = false;
+        }
+    });
+
+    function validateAge(ageInput) {
+        if (isNaN(ageInput)) {
+            return false;
+        }
+        else if(ageInput< 0 || ageInput > 30){
+            return false;
+        }
+        return true;
+    }
+
+    //CHECK DESCRIPTION no need to code if i keep the empty validations, we will see... ACTUALLY I WILL CODE IT LATER THO
+
+
+
+
+    //CHECK COURRIEL
+
+    courrielInput.addEventListener('change', function() {
+        let validation = validateCourriel(courrielInput);
+        if (!validation.isValid) {
+            displayErrorMessage("L'entree est invalide", courrielError); 
+            submitButton.disabled = true;
+        } else {
+            clearErrorMessage(courrielError);
+            submitButton.disabled = false;
+        }
+    });
+
+    function validateCourriel(courrielInput) {
+        let regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (regex.test(courrielInput)) {
+            return true;
+        }
+        return false;
+    }
+
+    //CHECK ADRESSE 'adresse civique où récupérer l'animal lors de l'adoption;
+    adresseInput.addEventListener('change', function() {
+        let validation = validateAdresse(adresseInput);
+        if (!validation.isValid) {
+            displayErrorMessage("L'entree est invalide", adresseError); 
+            submitButton.disabled = true;
+        } else {
+            clearErrorMessage(adresseError);
+            submitButton.disabled = false;
+        }
+    });
+
+    function validateAdresse(adresseInput) {
+        if (isNaN(adresseInput)) {
+            return false;
+        }
+        else if(adresseInput.length > 5){
+            return false;
+        }
+        else if(adresseInput= 0){
+            return false;
+        }
+        return true;
+    }
+
+    //CHECK VILLE
+    villeInput.addEventListener('change', async function() {
+        let validation = await validateVille(villeInput.value);
+        if (!validation) {
+            displayErrorMessage("L'entree est invalide", villeError); 
+            submitButton.disabled = true;
+        } else {
+            clearErrorMessage(villeError);
+            submitButton.disabled = false;
+        }
+    });
+
+    async function validateVille(villeInput) {
+        if (villeInput.includes(",")) {
+            return false;
+        }
+        else if(!isNaN(villeInput)){
+            return false;
+        }
+        //geonames is a api that gives us the cities of quebec in their database
+        let response = await fetch(`http://api.geonames.org/searchJSON?name=${villeInput}&country=CA&adminCode1=QC&maxRows=10&username=ahdrii`);
+        let data = await response.json();
+        let cities = data.geonames.map(geoname => geoname.name);
     
-//     //CHECK RECLAMATION 2
-//     checkReclamation(twoReclamation, twoReclamationError, 2);
-    
-//     //CHECK RECLAMATION 3
-//     checkReclamation(threeReclamation, threeReclamationError, 3);
-    
-//     //CHECK RECLAMATION 4
-//     checkReclamation(fourReclamation, fourReclamationError, 4);
+        return cities.includes(villeInput);
+    }
+
+    //CHECK CODE POSTAL
+    codePostalInput.addEventListener('change', function() {
+        let validation = validateCodePostal(codePostalInput);
+        if (!validation.isValid) {
+            displayErrorMessage("L'entree est invalide", codePostalError); 
+            submitButton.disabled = true;
+        } else {
+            clearErrorMessage(codePostalError);
+            submitButton.disabled = false;
+        }
+    });
+
+    function validateCodePostal(codePostalInput) {
+        let myRegex = new RegExp("^[ABCEGHJKLMNPRSTVXY][0-9][ABCEGHJKLMNPRSTVWXYZ] ?[0-9][ABCEGHJKLMNPRSTVWXYZ][0-9]$"); //regex for postal code
+        if(myRegex.test(codePostalInput)){
+            return true;
+        }
+        return false;
+    }
 
 
-//     //******************************************
-//     //**           IF EMPTY FIELDS            **
-//     //******************************************
-
-//     //CHECK DATE DE NAISSANCE VIDE
-//     const inputsDate = [voitureInput, anneeInput, kiloInput, cameraSelect, reclamationSelect, submitButton];
-
-//     inputsDate.forEach(input => {
-//         input.addEventListener('click', function() {
-//         emptyOnClick(naissanceInput, "Ce champs est vide.", naissanceError);
-//         });
-//     });
-
-//     //CHECK VOITURE VIDE
-
-//     const inputsVoiture = [anneeInput, kiloInput, cameraSelect, reclamationSelect, submitButton];
-
-//     inputsVoiture.forEach(input => {
-//         input.addEventListener('click', function() {
-//             emptyOnClick(voitureInput, "Ce champs est vide.", voitureError);
-//         });
-//     });
 
 
-//     //CHECK ANNEE VIDE
-
-//     const inputsAnnee = [kiloInput, cameraSelect, reclamationSelect, submitButton];
-
-//     inputsAnnee.forEach(input => {
-//         input.addEventListener('click', function() {
-//             emptyOnClick(anneeInput, "Ce champs est vide.", anneeError);
-//         });
-//     });
-
-//     //CHECK KILO VIDE
-//     const inputsKilo = [cameraSelect, reclamationSelect, submitButton];
-
-//     inputsKilo.forEach(input => {
-//         input.addEventListener('click', function() {
-//             emptyOnClick(kiloInput, "Ce champs est vide.", kiloError);
-//         });
-//     });  
-
-//     //CHECK RECLAMATION 1 VIDE
-//     const inputsRecOne = [twoReclamation, threeReclamation, fourReclamation, submitButton];
-
-//     inputsRecOne.forEach(input => {
-//         input.addEventListener('click', function() {
-//             emptyOnClick(oneReclamation, "Ce champs est vide.", oneReclamationError);
-//         });
-//     });  
-
-//     //CHECK RECLAMATION 2 VIDE
-//     const inputsRecTwo = [threeReclamation, fourReclamation, submitButton];
-
-//     inputsRecTwo.forEach(input => {
-//         input.addEventListener('click', function() {
-//             emptyOnClick(twoReclamation, "Ce champs est vide.", twoReclamationError);
-//         });
-//     });  
 
 
-//     //CHECK RECLAMATION 3 VIDE
-//     const inputsRecThree = [fourReclamation, submitButton];
 
-//     inputsRecThree.forEach(input => {
-//         input.addEventListener('click', function() {
-//             emptyOnClick(threeReclamation, "Ce champs est vide.", threeReclamationError);
-//         });
-//     });  
 
-//     const inputsRecFour= [submitButton];
 
-//     inputsRecFour.forEach(input => {
-//         input.addEventListener('click', function() {
-//             emptyOnClick(fourReclamation, "Ce champs est vide.", fourReclamationError);
-//         });
-//     });  
 
-//     function checkFilled(){
-//         if (naissanceInput.value === "") {
-//             return false;
-//         }
-//         if (voitureInput.value === "") {
-//             return false;
-//         }
-//         if (anneeInput.value === "") {
-//             return false;
-//         }
-//         if (kiloInput.value === "") {
-//             return false;
-//         }
-//         if (reclamationNumbers.value === "1-reclamation" && oneReclamation.value === "") {
-//                 return false;
-//             }
-//         if (reclamationNumbers.value === "2-reclamation" && twoReclamation.value === "") {
-//                 return false;
-//             }
-//         if (reclamationNumbers.value === "3-reclamation" && threeReclamation.value === "") {
-//                 return false;
-//             }
-//         if (reclamationNumbers.value === "4-reclamation" && fourReclamation.value === "") {
-//                 return false;
-//             }
+
+    });
+
+
+    //******************************************
+    //**           IF EMPTY FIELDS            **
+    //******************************************
+
+    //CHECK DATE DE NAISSANCE VIDE
+    const inputsDate = [voitureInput, anneeInput, kiloInput, cameraSelect, reclamationSelect, submitButton];
+
+    inputsDate.forEach(input => {
+        input.addEventListener('click', function() {
+        emptyOnClick(naissanceInput, "Ce champs est vide.", naissanceError);
+        });
+    });
+
+    //CHECK VOITURE VIDE
+
+    const inputsVoiture = [anneeInput, kiloInput, cameraSelect, reclamationSelect, submitButton];
+
+    inputsVoiture.forEach(input => {
+        input.addEventListener('click', function() {
+            emptyOnClick(voitureInput, "Ce champs est vide.", voitureError);
+        });
+    });
+
+
+    //CHECK ANNEE VIDE
+
+    const inputsAnnee = [kiloInput, cameraSelect, reclamationSelect, submitButton];
+
+    inputsAnnee.forEach(input => {
+        input.addEventListener('click', function() {
+            emptyOnClick(anneeInput, "Ce champs est vide.", anneeError);
+        });
+    });
+
+    //CHECK KILO VIDE
+    const inputsKilo = [cameraSelect, reclamationSelect, submitButton];
+
+    inputsKilo.forEach(input => {
+        input.addEventListener('click', function() {
+            emptyOnClick(kiloInput, "Ce champs est vide.", kiloError);
+        });
+    });  
+
+    //CHECK RECLAMATION 1 VIDE
+    const inputsRecOne = [twoReclamation, threeReclamation, fourReclamation, submitButton];
+
+    inputsRecOne.forEach(input => {
+        input.addEventListener('click', function() {
+            emptyOnClick(oneReclamation, "Ce champs est vide.", oneReclamationError);
+        });
+    });  
+
+    //CHECK RECLAMATION 2 VIDE
+    const inputsRecTwo = [threeReclamation, fourReclamation, submitButton];
+
+    inputsRecTwo.forEach(input => {
+        input.addEventListener('click', function() {
+            emptyOnClick(twoReclamation, "Ce champs est vide.", twoReclamationError);
+        });
+    });  
+
+
+    //CHECK RECLAMATION 3 VIDE
+    const inputsRecThree = [fourReclamation, submitButton];
+
+    inputsRecThree.forEach(input => {
+        input.addEventListener('click', function() {
+            emptyOnClick(threeReclamation, "Ce champs est vide.", threeReclamationError);
+        });
+    });  
+
+    const inputsRecFour= [submitButton];
+
+    inputsRecFour.forEach(input => {
+        input.addEventListener('click', function() {
+            emptyOnClick(fourReclamation, "Ce champs est vide.", fourReclamationError);
+        });
+    });  
+
+    function checkFilled(){
+        if (naissanceInput.value === "") {
+            return false;
+        }
+        if (voitureInput.value === "") {
+            return false;
+        }
+        if (anneeInput.value === "") {
+            return false;
+        }
+        if (kiloInput.value === "") {
+            return false;
+        }
+        if (reclamationNumbers.value === "1-reclamation" && oneReclamation.value === "") {
+                return false;
+            }
+        if (reclamationNumbers.value === "2-reclamation" && twoReclamation.value === "") {
+                return false;
+            }
+        if (reclamationNumbers.value === "3-reclamation" && threeReclamation.value === "") {
+                return false;
+            }
+        if (reclamationNumbers.value === "4-reclamation" && fourReclamation.value === "") {
+                return false;
+            }
         
-//         return true;
-//     }
+        return true;
+    }
 
 
-// });
+});
 
 
-// //******************************************
-// //**         FUNCTION VALIDATIONS         **
-// //******************************************
+//******************************************
+//**         FUNCTION VALIDATIONS         **
+//******************************************
 
 
-// // VALIDATE DATE DE NAISSANCE
-// function validateNaissance(naissanceInput, genreSelect){
-// if (!isValidDate(naissanceInput)) {
-//     return { isValid: false, errorMessage: "Veuillez selectionner une date de naissance valide ex. 1970-01-06." };
-// }
-// const age = isAge(naissanceInput);
-// if ((genreSelect.value ==="femme" && age < 16) || ((genreSelect.value ==="homme" || genreSelect.value ==="non-binaire") && age < 18) || age >= 100) {
-//     return { isValid: false, errorMessage: "Désolé, nous n'avons aucun produit à offrir pour ce profil de client" };
-// }   
-// return { isValid: true, errorMessage: "" };
-// }
+// VALIDATE DATE DE NAISSANCE
+function validateNaissance(naissanceInput, genreSelect){
+if (!isValidDate(naissanceInput)) {
+    return { isValid: false, errorMessage: "Veuillez selectionner une date de naissance valide ex. 1970-01-06." };
+}
+const age = isAge(naissanceInput);
+if ((genreSelect.value ==="femme" && age < 16) || ((genreSelect.value ==="homme" || genreSelect.value ==="non-binaire") && age < 18) || age >= 100) {
+    return { isValid: false, errorMessage: "Désolé, nous n'avons aucun produit à offrir pour ce profil de client" };
+}   
+return { isValid: true, errorMessage: "" };
+}
 
-// // VALIDATE VOITURE
-// function validateVoiture(voitureInput) {
-//     const voitureValue = voitureInput.value.trim();
-//     if (isNaN(voitureValue)) {
-//         return { isValid: false, errorMessage: "La valeur de votre voiture doit contenir uniquement des chiffres." };
-//     } else if (Number(voitureValue) > 100000) {
-//         return { isValid: false, errorMessage: "Désolé, nous n'avons aucun produit à offrir pour ce profil de client" };
-//     }
-//     return { isValid: true, errorMessage: "" };
-// }
+// VALIDATE VOITURE
+function validateVoiture(voitureInput) {
+    const voitureValue = voitureInput.value.trim();
+    if (isNaN(voitureValue)) {
+        return { isValid: false, errorMessage: "La valeur de votre voiture doit contenir uniquement des chiffres." };
+    } else if (Number(voitureValue) > 100000) {
+        return { isValid: false, errorMessage: "Désolé, nous n'avons aucun produit à offrir pour ce profil de client" };
+    }
+    return { isValid: true, errorMessage: "" };
+}
 
-// //VALIDATE ANNEE
+//VALIDATE ANNEE
 
-// function validateAnnee(anneeInput, anneeError){
-//     let errorMessage = "";
-//     if(anneeInput.value.length !== 4 || isNaN(anneeInput.value)){
-//         errorMessage = "La valeur de l'année de la voiture doit contenir exactement 4 chiffres.";
-//     } else if(calcAgeCar(anneeInput)>25 || calcAgeCar(anneeInput)<0){
-//         errorMessage = "Désolé, nous n'avons aucun produit à offrir pour ce profil de client";
-//     }
+function validateAnnee(anneeInput, anneeError){
+    let errorMessage = "";
+    if(anneeInput.value.length !== 4 || isNaN(anneeInput.value)){
+        errorMessage = "La valeur de l'année de la voiture doit contenir exactement 4 chiffres.";
+    } else if(calcAgeCar(anneeInput)>25 || calcAgeCar(anneeInput)<0){
+        errorMessage = "Désolé, nous n'avons aucun produit à offrir pour ce profil de client";
+    }
 
-//     if (errorMessage) {
-//         displayErrorMessage(errorMessage, anneeError);
-//         return { isValid: false, errorMessage: errorMessage };
-//     } else {
-//         clearErrorMessage(anneeError);
-//         return { isValid: true, errorMessage: "" };
-//     }
-// }
-
-
-// //VALIDATE KILO 
-// function validateKilo(kiloInput, kiloError){
-//     let errorMessage = "";
-//     if (isNaN(kiloInput.value)) {
-//         errorMessage = "Veuillez ecrire le kilometrage en chiffres seulement.";
-//     } else if(kiloInput.value>50000){
-//         errorMessage = "Désolé, nous n'avons aucun produit à offrir pour ce profil de client";
-//     }
+    if (errorMessage) {
+        displayErrorMessage(errorMessage, anneeError);
+        return { isValid: false, errorMessage: errorMessage };
+    } else {
+        clearErrorMessage(anneeError);
+        return { isValid: true, errorMessage: "" };
+    }
+}
 
 
-//     if (errorMessage) {
-//         displayErrorMessage(errorMessage, kiloError);
-//         return { isValid: false, errorMessage: errorMessage };
-//     } else {
-//         clearErrorMessage(kiloError);
-//         return { isValid: true, errorMessage: "" };
-//     }
-// }
+//VALIDATE KILO 
+function validateKilo(kiloInput, kiloError){
+    let errorMessage = "";
+    if (isNaN(kiloInput.value)) {
+        errorMessage = "Veuillez ecrire le kilometrage en chiffres seulement.";
+    } else if(kiloInput.value>50000){
+        errorMessage = "Désolé, nous n'avons aucun produit à offrir pour ce profil de client";
+    }
 
 
-// // VALIDATE CAMERA
-// function validateCamera(cameraSelect, cameraError){
-//     let errorMessage = "";
-//     if (cameraSelect.value ==="non-camera"){
-//         errorMessage = "Désolé, nous n'avons aucun produit à offrir pour ce profil de client";
-//     }
+    if (errorMessage) {
+        displayErrorMessage(errorMessage, kiloError);
+        return { isValid: false, errorMessage: errorMessage };
+    } else {
+        clearErrorMessage(kiloError);
+        return { isValid: true, errorMessage: "" };
+    }
+}
 
-//     if (errorMessage) {
-//         displayErrorMessage(errorMessage, cameraError);
-//         return { isValid: false, errorMessage: errorMessage };
-//     } else {
-//         clearErrorMessage(cameraError);
-//         return { isValid: true, errorMessage: "" };
-//     }
-// }
 
-// //Pour les champs vides, envoyer message d'erreur
-// function emptyOnClick(input, errorMessage, errorElement) {
-//     const inputValue = input.value.trim();
-//     if (inputValue === "") {
-//         displayErrorMessage(errorMessage, errorElement);
-//     }
-// }
+// VALIDATE CAMERA
+function validateCamera(cameraSelect, cameraError){
+    let errorMessage = "";
+    if (cameraSelect.value ==="non-camera"){
+        errorMessage = "Désolé, nous n'avons aucun produit à offrir pour ce profil de client";
+    }
+
+    if (errorMessage) {
+        displayErrorMessage(errorMessage, cameraError);
+        return { isValid: false, errorMessage: errorMessage };
+    } else {
+        clearErrorMessage(cameraError);
+        return { isValid: true, errorMessage: "" };
+    }
+}
+
+//Pour les champs vides, envoyer message d'erreur
+function emptyOnClick(input, errorMessage, errorElement) {
+    const inputValue = input.value.trim();
+    if (inputValue === "") {
+        displayErrorMessage(errorMessage, errorElement);
+    }
+}
 
 
     
-// // VALIDATE RECLAMATION NUMBER CONTENT 1, 2, 3, 4 :
-// function validateReclamationInput(reclamation, Errormsg){
-//     let errorMessage = "";
-//     if (isNaN(reclamation.value)) {
-//         errorMessage = "La valeur de votre reclamation doit contenir uniquement des chiffres.";
-//     } else if (Number(reclamation.value) > 35000) {
-//         errorMessage = "Désolé, nous n'avons aucun produit à offrir pour ce profil de client";
-//     }
+// VALIDATE RECLAMATION NUMBER CONTENT 1, 2, 3, 4 :
+function validateReclamationInput(reclamation, Errormsg){
+    let errorMessage = "";
+    if (isNaN(reclamation.value)) {
+        errorMessage = "La valeur de votre reclamation doit contenir uniquement des chiffres.";
+    } else if (Number(reclamation.value) > 35000) {
+        errorMessage = "Désolé, nous n'avons aucun produit à offrir pour ce profil de client";
+    }
 
-//     if (errorMessage) {
-//         displayErrorMessage(errorMessage, Errormsg);
-//         return { isValid: false, errorMessage: errorMessage };
-//     } else {
-//         clearErrorMessage(Errormsg);
-//         return { isValid: true, errorMessage: "" };
-//     }
-// }
-
-
-// function checkOverload(reclamation1, reclamation2, reclamation3, reclamation4, totalReclamationError){
-//     let amount1 = Number(reclamation1.value);
-//     let amount2 = Number(reclamation2.value);
-//     let amount3 = Number(reclamation3.value);
-//     let amount4 = Number(reclamation4.value);
-
-//     let total = amount1+amount2+amount3+amount4;
-//     if(total>35000){
-//         displayErrorMessage("Désolé, nous n'avons aucun produit à offrir pour ce profil de client", totalReclamationError);
-//         return false
-//     }
-//     if(total >25000){
-//         return 700;
-//     }
-//     return 0;
-// }
-
-// //get nbr reclamation reeturn a int
-// function getNbrReclamation(reclamationNumbers, reclamationSelect){
-//     if(reclamationSelect.value === "non-reclamation"){
-//         return 0;
-//     }
-//     if(reclamationNumbers.value === "une-reclamation"){
-//         return 1;
-//     }
-//     if(reclamationNumbers.value === "deux-reclamation"){
-//         return 2;
-//     }
-//     if(reclamationNumbers.value === "trois-reclamation"){
-//         return 3;
-//     }
-//     if(reclamationNumbers.value === "quattre-reclamation"){
-//         return 4;
-//     }
-// }
-
-// //get rate base
-// function getbaseRate(genreSelect,naissanceInput,voitureInput){
-//     myValuedCar = Number(voitureInput.value);
-//     if (genreSelect.value === "homme" || genreSelect.value === "non-binaire" && isAge(naissanceInput) < 25) {
-//         return 0.05*myValuedCar //5%
-//     }
-//     else if (isAge(naissanceInput) <= 75) {
-//         return 0.04*myValuedCar; //4%
-//     }
-//     return 0.015*myValuedCar; //1.5%
-// }
-
-// //get final rate
-// function calculateAnnualRate(baseRate, nbrReclamation, kilo, totalReclamations){
-//     let annualRate = baseRate + (350*nbrReclamation) + (0.02*kilo) + totalReclamations;
-//     return annualRate;
-// }
-
-// //get monthly rate
-// function calculateMonthlyRate(annualRate){
-//     let monthlyRate = annualRate/12;
-//     return monthlyRate;
-// }
-
-// function resetValues(reclamation1, reclamation2, reclamation3, reclamation4) {
-//     reclamation1.value = "";
-//     reclamation2.value = "";
-//     reclamation3.value = "";
-//     reclamation4.value = "";
-// }
+    if (errorMessage) {
+        displayErrorMessage(errorMessage, Errormsg);
+        return { isValid: false, errorMessage: errorMessage };
+    } else {
+        clearErrorMessage(Errormsg);
+        return { isValid: true, errorMessage: "" };
+    }
+}
 
 
-// //******************************************
-// //**       FUNCTION OF EXECUTIONS         **
-// //******************************************
-// function showDivReclamation(){
-//     const reclamationNumDiv = document.getElementById("reclamation-details");
-//     reclamationNumDiv.style.display = "block";
-// }
-// function showDivQuestion1(){
-//     const questionOneDiv = document.getElementById("question-one");
-//     questionOneDiv.style.display = "block";
-// }
-// function showDivQuestion2(){
-//     const questionTwoDiv = document.getElementById("question-two");
-//     questionTwoDiv.style.display = "block";
-// }
-// function showDivQuestion3(){
-//     const questionThreeDiv = document.getElementById("question-three");
-//     questionThreeDiv.style.display = "block";
-// }
-// function showDivQuestion4(){
-//     const questionFourDiv = document.getElementById("question-four");
-//     questionFourDiv.style.display = "block";
-// }
+function checkOverload(reclamation1, reclamation2, reclamation3, reclamation4, totalReclamationError){
+    let amount1 = Number(reclamation1.value);
+    let amount2 = Number(reclamation2.value);
+    let amount3 = Number(reclamation3.value);
+    let amount4 = Number(reclamation4.value);
+
+    let total = amount1+amount2+amount3+amount4;
+    if(total>35000){
+        displayErrorMessage("Désolé, nous n'avons aucun produit à offrir pour ce profil de client", totalReclamationError);
+        return false
+    }
+    if(total >25000){
+        return 700;
+    }
+    return 0;
+}
+
+//get nbr reclamation reeturn a int
+function getNbrReclamation(reclamationNumbers, reclamationSelect){
+    if(reclamationSelect.value === "non-reclamation"){
+        return 0;
+    }
+    if(reclamationNumbers.value === "une-reclamation"){
+        return 1;
+    }
+    if(reclamationNumbers.value === "deux-reclamation"){
+        return 2;
+    }
+    if(reclamationNumbers.value === "trois-reclamation"){
+        return 3;
+    }
+    if(reclamationNumbers.value === "quattre-reclamation"){
+        return 4;
+    }
+}
+
+//get rate base
+function getbaseRate(genreSelect,naissanceInput,voitureInput){
+    myValuedCar = Number(voitureInput.value);
+    if (genreSelect.value === "homme" || genreSelect.value === "non-binaire" && isAge(naissanceInput) < 25) {
+        return 0.05*myValuedCar //5%
+    }
+    else if (isAge(naissanceInput) <= 75) {
+        return 0.04*myValuedCar; //4%
+    }
+    return 0.015*myValuedCar; //1.5%
+}
+
+//get final rate
+function calculateAnnualRate(baseRate, nbrReclamation, kilo, totalReclamations){
+    let annualRate = baseRate + (350*nbrReclamation) + (0.02*kilo) + totalReclamations;
+    return annualRate;
+}
+
+//get monthly rate
+function calculateMonthlyRate(annualRate){
+    let monthlyRate = annualRate/12;
+    return monthlyRate;
+}
+
+function resetValues(reclamation1, reclamation2, reclamation3, reclamation4) {
+    reclamation1.value = "";
+    reclamation2.value = "";
+    reclamation3.value = "";
+    reclamation4.value = "";
+}
 
 
-// function defaultDiv(){
-//     const reclamationNumDiv = document.getElementById("reclamation-details");
-//     const questionOneDiv = document.getElementById("question-one");
-//     const questionTwoDiv = document.getElementById("question-two");
-//     const questionThreeDiv = document.getElementById("question-three");
-//     const questionFourDiv = document.getElementById("question-four");
-//     reclamationNumDiv.style.display = "none";
-//     questionOneDiv.style.display = "none";
-//     questionTwoDiv.style.display = "none";
-//     questionThreeDiv.style.display = "none";
-//     questionFourDiv.style.display = "none";
-// }
-
-// function disableInputs(inputs) {
-//     for (let input of inputs) {
-//         input.disabled = true;
-//     }
-//     resetButton.style.display = 'block';
-// } 
-
-
-// function enableInputs(inputs) {
-//     for (let input of inputs) {
-//         input.disabled = false;
-//     }
-// }
+//******************************************
+//**       FUNCTION OF EXECUTIONS         **
+//******************************************
+function showDivReclamation(){
+    const reclamationNumDiv = document.getElementById("reclamation-details");
+    reclamationNumDiv.style.display = "block";
+}
+function showDivQuestion1(){
+    const questionOneDiv = document.getElementById("question-one");
+    questionOneDiv.style.display = "block";
+}
+function showDivQuestion2(){
+    const questionTwoDiv = document.getElementById("question-two");
+    questionTwoDiv.style.display = "block";
+}
+function showDivQuestion3(){
+    const questionThreeDiv = document.getElementById("question-three");
+    questionThreeDiv.style.display = "block";
+}
+function showDivQuestion4(){
+    const questionFourDiv = document.getElementById("question-four");
+    questionFourDiv.style.display = "block";
+}
 
 
-// function calcAgeCar(anneeInput){
-//     const carYear = anneeInput.value;
-//     const currentDate = new Date();
+function defaultDiv(){
+    const reclamationNumDiv = document.getElementById("reclamation-details");
+    const questionOneDiv = document.getElementById("question-one");
+    const questionTwoDiv = document.getElementById("question-two");
+    const questionThreeDiv = document.getElementById("question-three");
+    const questionFourDiv = document.getElementById("question-four");
+    reclamationNumDiv.style.display = "none";
+    questionOneDiv.style.display = "none";
+    questionTwoDiv.style.display = "none";
+    questionThreeDiv.style.display = "none";
+    questionFourDiv.style.display = "none";
+}
 
-//     return currentDate.getFullYear()-carYear;
-// }
-
-// //validate naissance if unselected
-// function isValidDate(dateInput) {
-//     const dateValue = dateInput.valueAsDate;
-//     const today = new Date();
-//     if (dateValue===null){
-//         return false;
-//     }
-//     if (dateValue > today) {
-//         return false;
-//     }
-//     return true;
-// }
-
-
-// function isAge(dateInput){    
-//     const dateValue = dateInput.valueAsDate;
-//     const today = new Date();
-//     const birthDate = new Date(dateValue);
-//     let age = today.getFullYear() - birthDate.getFullYear();
-//     // Display the age
-//     return age; 
-// }
+function disableInputs(inputs) {
+    for (let input of inputs) {
+        input.disabled = true;
+    }
+    resetButton.style.display = 'block';
+} 
 
 
-// function displayErrorMessage(message, errorElement) {
-//     errorElement.textContent = message;
-// }
+function enableInputs(inputs) {
+    for (let input of inputs) {
+        input.disabled = false;
+    }
+}
 
-// function clearErrorMessages() {
-//     const errorElements = document.querySelectorAll(".error");
-//     for (const errorElement of errorElements) {
-//         errorElement.textContent = "";
-//     }
-// }
 
-// function clearErrorMessage(errorElement) {
-//     errorElement.textContent = "";
-});
+function calcAgeCar(anneeInput){
+    const carYear = anneeInput.value;
+    const currentDate = new Date();
+
+    return currentDate.getFullYear()-carYear;
+}
+
+//validate naissance if unselected
+function isValidDate(dateInput) {
+    const dateValue = dateInput.valueAsDate;
+    const today = new Date();
+    if (dateValue===null){
+        return false;
+    }
+    if (dateValue > today) {
+        return false;
+    }
+    return true;
+}
+
+
+function isAge(dateInput){    
+    const dateValue = dateInput.valueAsDate;
+    const today = new Date();
+    const birthDate = new Date(dateValue);
+    let age = today.getFullYear() - birthDate.getFullYear();
+    // Display the age
+    return age; 
+}
+
+
+function displayErrorMessage(message, errorElement) {
+    errorElement.textContent = message;
+}
+
+function clearErrorMessages() {
+    const errorElements = document.querySelectorAll(".error");
+    for (const errorElement of errorElements) {
+        errorElement.textContent = "";
+    }
+}
+
+function clearErrorMessage(errorElement) {
+    errorElement.textContent = "";
+}
