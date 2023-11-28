@@ -8,7 +8,7 @@ window.addEventListener("load", function () {
     const courrielInput = document.getElementById("courriel");
     const adresseInput = document.getElementById("adresse");
     const villeInput = document.getElementById("ville");
-    const codePostalInput = document.getElementById("code-postal");
+    const codePostalInput = document.getElementById("cp");
 
     const nameError = document.getElementById("name-error");
     const especeError = document.getElementById("espece-error");
@@ -18,41 +18,17 @@ window.addEventListener("load", function () {
     const courrielError = document.getElementById("courriel-error");
     const adresseError = document.getElementById("adresse-error");
     const villeError = document.getElementById("ville-error");
-    const codePostalError = document.getElementById("code-postal-error");
+    const codePostalError = document.getElementById("cp-error");
 
     const submitButton = document.getElementById("submit-button");
 
-    //es KAKA
-    // let myCities = ["Montreal", "Québec", "Laval", "Gatineau", "Longueuil", "Sherbrooke", "Lévis", "Saguenay",
-    //     "Trois-Rivières", "Terrebonne", "Saint-Jean-sur-Richelieu", "Brossard", "Repentigny", "Saint-Jérôme",
-    //     Drummondville, Granby, Mirabel, Blainville, Saint-Hyacinthe, Mascouche, Châteauguay, Shawinigan, Rimouski
-    //     Dollard-Des Ormeaux, Victoriaville, Saint-Eustache,Salaberry-de-Valleyfield, Vaudreuil-Dorion	, Rouyn-Noranda	,
-    //     Boucherville, Sorel-Tracy, Côte-Saint-Luc, Saint-Georges	, Pointe-Claire	, Val-d'or,  Chambly	, Alma	,
-    //     Sainte-Julie	, Saint-Constant	, Magog	, Boisbriand	, Saint-Bruno-de-Montarville	,Sainte-Thérèse	
-    //     , La Prairie	,Thetford Mines	,Sept-Îles	, Belœil	, L'Assomption	, Saint-Lambert	, Varennes	, Joliette"
-    // ];
+
     //******************************************
     //**            EVENT LISTENERS           **
     //******************************************
 
     //!!!!!!!!!!COPIA Y PEGA DE MI TP2, YA LO ARREGLARE LUEGO XD PERO LAS CONSTANTES YA ESTAN DECLARADAS!!!!!!!!!!
 
-
-        //we have the reclamation inputs, need MONTANT BASE, NBR RECLAMATION, KILOMETRES
-        submitButton.addEventListener('click', function() {
-            let totalReclamations = checkOverload(oneReclamation, twoReclamation, threeReclamation, fourReclamation, totalReclamationError);
-                let myKilo = Number(kiloInput.value); //kilometrage de user 
-                let mynumberReclamation = getNbrReclamation(reclamationNumbers, reclamationSelect); //nbr de reclamation de user
-                let mybaseRate = getbaseRate(genreSelect,naissanceInput,voitureInput); //base rate de user
-                let myAnnualRate = calculateAnnualRate(mybaseRate, mynumberReclamation, myKilo, totalReclamations); //annual rate de user
-                let myMonthlyRate = calculateMonthlyRate(myAnnualRate); //monthly rate de user   
-            if (checkFilled() === true) {         
-                displayErrorMessage(myAnnualRate, showAnnualRate); 
-                displayErrorMessage(myMonthlyRate, showMonthlyRate);
-                resetButton.style.display = 'block';
-            }
-        });
-    
 
 
     // CHECK NAME    • Le nom de l'animal doit avoir entre 3 et 20 caractères.
@@ -71,7 +47,7 @@ window.addEventListener("load", function () {
         if (nameInput.includes(",")) {
             return false;
         }
-        if (nameInput.value.length <= 3 && nameInput.value.length >= 20) {
+        if (nameInput.length <= 3 && nameInput.length >= 20) {
             return true;
         }
         return false;
@@ -251,7 +227,7 @@ window.addEventListener("load", function () {
 
 
 
-    });
+    
 
 
     //******************************************
@@ -371,67 +347,8 @@ window.addEventListener("load", function () {
 //******************************************
 
 
-// VALIDATE DATE DE NAISSANCE
-function validateNaissance(naissanceInput, genreSelect){
-if (!isValidDate(naissanceInput)) {
-    return { isValid: false, errorMessage: "Veuillez selectionner une date de naissance valide ex. 1970-01-06." };
-}
-const age = isAge(naissanceInput);
-if ((genreSelect.value ==="femme" && age < 16) || ((genreSelect.value ==="homme" || genreSelect.value ==="non-binaire") && age < 18) || age >= 100) {
-    return { isValid: false, errorMessage: "Désolé, nous n'avons aucun produit à offrir pour ce profil de client" };
-}   
-return { isValid: true, errorMessage: "" };
-}
-
-// VALIDATE VOITURE
-function validateVoiture(voitureInput) {
-    const voitureValue = voitureInput.value.trim();
-    if (isNaN(voitureValue)) {
-        return { isValid: false, errorMessage: "La valeur de votre voiture doit contenir uniquement des chiffres." };
-    } else if (Number(voitureValue) > 100000) {
-        return { isValid: false, errorMessage: "Désolé, nous n'avons aucun produit à offrir pour ce profil de client" };
-    }
-    return { isValid: true, errorMessage: "" };
-}
-
-//VALIDATE ANNEE
-
-function validateAnnee(anneeInput, anneeError){
-    let errorMessage = "";
-    if(anneeInput.value.length !== 4 || isNaN(anneeInput.value)){
-        errorMessage = "La valeur de l'année de la voiture doit contenir exactement 4 chiffres.";
-    } else if(calcAgeCar(anneeInput)>25 || calcAgeCar(anneeInput)<0){
-        errorMessage = "Désolé, nous n'avons aucun produit à offrir pour ce profil de client";
-    }
-
-    if (errorMessage) {
-        displayErrorMessage(errorMessage, anneeError);
-        return { isValid: false, errorMessage: errorMessage };
-    } else {
-        clearErrorMessage(anneeError);
-        return { isValid: true, errorMessage: "" };
-    }
-}
 
 
-//VALIDATE KILO 
-function validateKilo(kiloInput, kiloError){
-    let errorMessage = "";
-    if (isNaN(kiloInput.value)) {
-        errorMessage = "Veuillez ecrire le kilometrage en chiffres seulement.";
-    } else if(kiloInput.value>50000){
-        errorMessage = "Désolé, nous n'avons aucun produit à offrir pour ce profil de client";
-    }
-
-
-    if (errorMessage) {
-        displayErrorMessage(errorMessage, kiloError);
-        return { isValid: false, errorMessage: errorMessage };
-    } else {
-        clearErrorMessage(kiloError);
-        return { isValid: true, errorMessage: "" };
-    }
-}
 
 
 // VALIDATE CAMERA
@@ -550,27 +467,6 @@ function resetValues(reclamation1, reclamation2, reclamation3, reclamation4) {
 //******************************************
 //**       FUNCTION OF EXECUTIONS         **
 //******************************************
-function showDivReclamation(){
-    const reclamationNumDiv = document.getElementById("reclamation-details");
-    reclamationNumDiv.style.display = "block";
-}
-function showDivQuestion1(){
-    const questionOneDiv = document.getElementById("question-one");
-    questionOneDiv.style.display = "block";
-}
-function showDivQuestion2(){
-    const questionTwoDiv = document.getElementById("question-two");
-    questionTwoDiv.style.display = "block";
-}
-function showDivQuestion3(){
-    const questionThreeDiv = document.getElementById("question-three");
-    questionThreeDiv.style.display = "block";
-}
-function showDivQuestion4(){
-    const questionFourDiv = document.getElementById("question-four");
-    questionFourDiv.style.display = "block";
-}
-
 
 function defaultDiv(){
     const reclamationNumDiv = document.getElementById("reclamation-details");
