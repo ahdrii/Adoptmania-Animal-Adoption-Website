@@ -27,37 +27,35 @@ window.addEventListener("load", function () {
     //**            EVENT LISTENERS           **
     //******************************************
 
-    //!!!!!!!!!!COPIA Y PEGA DE MI TP2, YA LO ARREGLARE LUEGO XD PERO LAS CONSTANTES YA ESTAN DECLARADAS!!!!!!!!!!
 
-
-
-    // CHECK NAME    • Le nom de l'animal doit avoir entre 3 et 20 caractères.
+    // CHECK NAME    done
     nameInput.addEventListener('change', function() {
-        let validation = validateName(nameInput);
-        if (!validation.isValid) {
+        let validation = validateName(nameInput.value);
+        if (validation === false) {
             displayErrorMessage("Le nom de l'animal doit avoir entre 3 et 20 caractères sans virgule.", nameError);
             submitButton.disabled = true;
         } else {
-            clearErrorMessage(especeError);
+            clearErrorMessage(nameError);
             submitButton.disabled = false;
         }
     });
 
     function validateName(nameInput) {
-        if (nameInput.includes(",")) {
+        let regexString = /[^a-zA-ZéèêëàâäôöûüçÉÈÊËÀÂÄÔÖÛÜÇ\s-.'']/;
+        if (regexString.test(nameInput)) {
             return false;
         }
-        if (nameInput.length <= 3 && nameInput.length >= 20) {
-            return true;
+        else if (nameInput.length < 3 || nameInput.length > 20) {
+            return false;
         }
-        return false;
+        return true;
     }
 
 
     // CHECK ESPECE
     especeInput.addEventListener('change', function() {
-        let validation = validateEspece(especeInput);
-        if (!validation.isValid) {
+        let validation = validateEspece(especeInput.value);
+        if (validation === false) {
             displayErrorMessage("L'entrée est invalide", especeError);
             submitButton.disabled = true;
         } else {
@@ -67,7 +65,8 @@ window.addEventListener("load", function () {
     });
 
     function validateEspece(especeInput) {
-        if (especeInput.includes(",")) {
+        let regexString = /[^a-zA-ZéèêëàâäôöûüçÉÈÊËÀÂÄÔÖÛÜÇ\s-'']/;
+        if (regexString.test(especeInput)) {
             return false;
         }
         return true;
@@ -78,8 +77,8 @@ window.addEventListener("load", function () {
     //CHECK RACE
     
     raceInput.addEventListener('change', function() {
-        let validation = validateRace(raceInput);
-        if (!validation.isValid) {
+        let validation = validateRace(raceInput.value);
+        if (validation === false) {
             displayErrorMessage("L'entrée est invalide", raceError);
             submitButton.disabled = true;
         } else {
@@ -89,18 +88,18 @@ window.addEventListener("load", function () {
     });
 
     function validateRace(raceInput) {
-        if (raceInput.includes(",")) {
+        let regexString = /[^a-zA-ZéèêëàâäôöûüçÉÈÊËÀÂÄÔÖÛÜÇ\s-'']/;
+        if (regexString.test(raceInput)) {
             return false;
         }
         return true;
     }
 
 
-    //CHECK AGE • L'âge doit être une valeur numérique entre 0 et 30.
-
+    //CHECK AGE 
     ageInput.addEventListener('change', function() {
-        let validation = validateAge(ageInput);
-        if (!validation.isValid) {
+        let validation = validateAge(ageInput.value);
+        if (validation === false) {
             displayErrorMessage("L'entree de l'age doit etre un chiffre entre 0 et 30.", ageError); 
             submitButton.disabled = true;
         } else {
@@ -110,7 +109,7 @@ window.addEventListener("load", function () {
     });
 
     function validateAge(ageInput) {
-        if (isNaN(ageInput)) {
+        if (isNaN(ageInput)||ageInput.includes(".")) {
             return false;
         }
         else if(ageInput< 0 || ageInput > 30){
@@ -120,15 +119,15 @@ window.addEventListener("load", function () {
     }
 
     //CHECK DESCRIPTION no need to code if i keep the empty validations, we will see... ACTUALLY I WILL CODE IT LATER THO
-
+    
 
 
 
     //CHECK COURRIEL
 
     courrielInput.addEventListener('change', function() {
-        let validation = validateCourriel(courrielInput);
-        if (!validation.isValid) {
+        let validation = validateCourriel(courrielInput.value);
+        if (validation === false) {
             displayErrorMessage("L'entree est invalide", courrielError); 
             submitButton.disabled = true;
         } else {
@@ -145,10 +144,10 @@ window.addEventListener("load", function () {
         return false;
     }
 
-    //CHECK ADRESSE 'adresse civique où récupérer l'animal lors de l'adoption;
+    //CHECK ADRESSE 
     adresseInput.addEventListener('change', function() {
-        let validation = validateAdresse(adresseInput);
-        if (!validation.isValid) {
+        let validation = validateAdresse(adresseInput.value);
+        if (validation === false) {
             displayErrorMessage("L'entree est invalide", adresseError); 
             submitButton.disabled = true;
         } else {
@@ -158,49 +157,37 @@ window.addEventListener("load", function () {
     });
 
     function validateAdresse(adresseInput) {
-        if (isNaN(adresseInput)) {
-            return false;
-        }
-        else if(adresseInput.length > 5){
-            return false;
-        }
-        else if(adresseInput= 0){
-            return false;
-        }
-        return true;
+        let regexAdresse = /^\d+\s+[a-zA-ZéèêëàâäôöûüçÉÈÊËÀÂÄÔÖÛÜÇ\s-]+$/;
+        return regexAdresse.test(adresseInput);
+
     }
 
     //CHECK VILLE
-    villeInput.addEventListener('change', async function() {
-        let validation = await validateVille(villeInput.value);
-        if (!validation) {
-            displayErrorMessage("L'entree est invalide", villeError); 
-            submitButton.disabled = true;
-        } else {
-            clearErrorMessage(villeError);
-            submitButton.disabled = false;
-        }
-    });
+        villeInput.addEventListener('change', function() { //input for debug'
+            let validation = validateVille(villeInput.value);
+            if (validation === false) {
+                displayErrorMessage("L'entree est invalide", villeError); 
+                submitButton.disabled = true;
+            } else {
+                clearErrorMessage(villeError);
+                submitButton.disabled = false;
+            }
+        });
 
-    async function validateVille(villeInput) {
-        if (villeInput.includes(",")) {
-            return false;
+        function validateVille(villeInput) {
+            let villeRegex = /[^a-zA-ZéèêëàâäôöûüçÉÈÊËÀÂÄÔÖÛÜÇ\s-'']/;
+            if (villeRegex.test(villeInput)) {//regex to get only letters (including accented ones) no ',' or numbers, etc
+                return false;
+            }
+            return true;
         }
-        else if(!isNaN(villeInput)){
-            return false;
-        }
-        //geonames is a api that gives us the cities of quebec in their database
-        let response = await fetch(`http://api.geonames.org/searchJSON?name=${villeInput}&country=CA&adminCode1=QC&maxRows=10&username=ahdrii`);
-        let data = await response.json();
-        let cities = data.geonames.map(geoname => geoname.name);
-    
-        return cities.includes(villeInput);
-    }
+
+
 
     //CHECK CODE POSTAL
     codePostalInput.addEventListener('change', function() {
-        let validation = validateCodePostal(codePostalInput);
-        if (!validation.isValid) {
+        let validation = validateCodePostal(codePostalInput.value);
+        if (validation === false) {
             displayErrorMessage("L'entree est invalide", codePostalError); 
             submitButton.disabled = true;
         } else {
@@ -217,17 +204,8 @@ window.addEventListener("load", function () {
         return false;
     }
 
+});
 
-
-
-
-
-
-
-
-
-
-    
 
 
     //******************************************
@@ -303,43 +281,7 @@ window.addEventListener("load", function () {
 
     const inputsRecFour= [submitButton];
 
-    inputsRecFour.forEach(input => {
-        input.addEventListener('click', function() {
-            emptyOnClick(fourReclamation, "Ce champs est vide.", fourReclamationError);
-        });
-    });  
 
-    function checkFilled(){
-        if (naissanceInput.value === "") {
-            return false;
-        }
-        if (voitureInput.value === "") {
-            return false;
-        }
-        if (anneeInput.value === "") {
-            return false;
-        }
-        if (kiloInput.value === "") {
-            return false;
-        }
-        if (reclamationNumbers.value === "1-reclamation" && oneReclamation.value === "") {
-                return false;
-            }
-        if (reclamationNumbers.value === "2-reclamation" && twoReclamation.value === "") {
-                return false;
-            }
-        if (reclamationNumbers.value === "3-reclamation" && threeReclamation.value === "") {
-                return false;
-            }
-        if (reclamationNumbers.value === "4-reclamation" && fourReclamation.value === "") {
-                return false;
-            }
-        
-        return true;
-    }
-
-
-});
 
 
 //******************************************
@@ -351,21 +293,6 @@ window.addEventListener("load", function () {
 
 
 
-// VALIDATE CAMERA
-function validateCamera(cameraSelect, cameraError){
-    let errorMessage = "";
-    if (cameraSelect.value ==="non-camera"){
-        errorMessage = "Désolé, nous n'avons aucun produit à offrir pour ce profil de client";
-    }
-
-    if (errorMessage) {
-        displayErrorMessage(errorMessage, cameraError);
-        return { isValid: false, errorMessage: errorMessage };
-    } else {
-        clearErrorMessage(cameraError);
-        return { isValid: true, errorMessage: "" };
-    }
-}
 
 //Pour les champs vides, envoyer message d'erreur
 function emptyOnClick(input, errorMessage, errorElement) {
@@ -468,63 +395,6 @@ function resetValues(reclamation1, reclamation2, reclamation3, reclamation4) {
 //**       FUNCTION OF EXECUTIONS         **
 //******************************************
 
-function defaultDiv(){
-    const reclamationNumDiv = document.getElementById("reclamation-details");
-    const questionOneDiv = document.getElementById("question-one");
-    const questionTwoDiv = document.getElementById("question-two");
-    const questionThreeDiv = document.getElementById("question-three");
-    const questionFourDiv = document.getElementById("question-four");
-    reclamationNumDiv.style.display = "none";
-    questionOneDiv.style.display = "none";
-    questionTwoDiv.style.display = "none";
-    questionThreeDiv.style.display = "none";
-    questionFourDiv.style.display = "none";
-}
-
-function disableInputs(inputs) {
-    for (let input of inputs) {
-        input.disabled = true;
-    }
-    resetButton.style.display = 'block';
-} 
-
-
-function enableInputs(inputs) {
-    for (let input of inputs) {
-        input.disabled = false;
-    }
-}
-
-
-function calcAgeCar(anneeInput){
-    const carYear = anneeInput.value;
-    const currentDate = new Date();
-
-    return currentDate.getFullYear()-carYear;
-}
-
-//validate naissance if unselected
-function isValidDate(dateInput) {
-    const dateValue = dateInput.valueAsDate;
-    const today = new Date();
-    if (dateValue===null){
-        return false;
-    }
-    if (dateValue > today) {
-        return false;
-    }
-    return true;
-}
-
-
-function isAge(dateInput){    
-    const dateValue = dateInput.valueAsDate;
-    const today = new Date();
-    const birthDate = new Date(dateValue);
-    let age = today.getFullYear() - birthDate.getFullYear();
-    // Display the age
-    return age; 
-}
 
 
 function displayErrorMessage(message, errorElement) {
