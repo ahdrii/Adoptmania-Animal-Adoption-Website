@@ -204,7 +204,7 @@ window.addEventListener("load", function () {
         return false;
     }
 
-});
+
 
 
 
@@ -213,11 +213,11 @@ window.addEventListener("load", function () {
     //******************************************
 
     //CHECK DATE DE NAISSANCE VIDE
-    const inputsDate = [voitureInput, anneeInput, kiloInput, cameraSelect, reclamationSelect, submitButton];
+    const inputsName = [especeInput, raceInput, ageInput, descriptionInput, courrielInput, adresseInput, villeInput, codePostalInput, submitButton];
 
-    inputsDate.forEach(input => {
+    inputsName.forEach(input => {
         input.addEventListener('click', function() {
-        emptyOnClick(naissanceInput, "Ce champs est vide.", naissanceError);
+        emptyOnClick(nameInput, "Ce champs est vide.", nameError);
         });
     });
 
@@ -280,7 +280,7 @@ window.addEventListener("load", function () {
     });  
 
     const inputsRecFour= [submitButton];
-
+});
 
 
 
