@@ -114,6 +114,22 @@ window.addEventListener("load", function () {
         return true;
     }
 
+    //CHECK DESCRIPTION
+    descriptionInput.addEventListener('change', function() {
+        let validation = validateDescription(descriptionInput.value);
+        if (validation === true) {
+            clearErrorMessage(descriptionError);
+            submitButton.disabled = false;
+        }
+    });
+
+    function validateDescription(descriptionInput) {
+        if (descriptionInput==="") {
+            return false;
+        }
+        return true;
+    }
+
     //CHECK COURRIEL
 
     courrielInput.addEventListener('change', function() {
