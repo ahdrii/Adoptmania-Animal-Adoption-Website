@@ -27,7 +27,6 @@ window.addEventListener("load", function () {
     //**            EVENT LISTENERS           **
     //******************************************
 
-
     // CHECK NAME    done
     nameInput.addEventListener('change', function() {
         let validation = validateName(nameInput.value);
@@ -51,7 +50,6 @@ window.addEventListener("load", function () {
         return true;
     }
 
-
     // CHECK ESPECE
     especeInput.addEventListener('change', function() {
         let validation = validateEspece(especeInput.value);
@@ -71,8 +69,6 @@ window.addEventListener("load", function () {
         }
         return true;
     }
-
-
 
     //CHECK RACE
     
@@ -117,11 +113,6 @@ window.addEventListener("load", function () {
         }
         return true;
     }
-
-    //CHECK DESCRIPTION no need to code if i keep the empty validations, we will see... ACTUALLY I WILL CODE IT LATER THO
-    
-
-
 
     //CHECK COURRIEL
 
@@ -182,8 +173,6 @@ window.addEventListener("load", function () {
             return true;
         }
 
-
-
     //CHECK CODE POSTAL
     codePostalInput.addEventListener('change', function() {
         let validation = validateCodePostal(codePostalInput.value);
@@ -204,95 +193,110 @@ window.addEventListener("load", function () {
         return false;
     }
 
-
-
-
-
     //******************************************
     //**           IF EMPTY FIELDS            **
     //******************************************
 
-    //CHECK DATE DE NAISSANCE VIDE
+    //CHECK NOM VIDE
     const inputsName = [especeInput, raceInput, ageInput, descriptionInput, courrielInput, adresseInput, villeInput, codePostalInput, submitButton];
 
     inputsName.forEach(input => {
-        input.addEventListener('click', function() {
+        input.addEventListener('focus', function() {
         emptyOnClick(nameInput, "Ce champs est vide.", nameError);
+        submitButton.disabled = true;
         });
     });
 
-    //CHECK VOITURE VIDE
+    //CHECK ESPECE VIDE
 
-    const inputsVoiture = [anneeInput, kiloInput, cameraSelect, reclamationSelect, submitButton];
+    const inputsEspece = [raceInput, ageInput, descriptionInput, courrielInput, adresseInput, villeInput, codePostalInput, submitButton];
 
-    inputsVoiture.forEach(input => {
-        input.addEventListener('click', function() {
-            emptyOnClick(voitureInput, "Ce champs est vide.", voitureError);
+    inputsEspece.forEach(input => {
+        input.addEventListener('focus', function() {
+            emptyOnClick(especeInput, "Ce champs est vide.", especeError);
+            submitButton.disabled = true;
         });
     });
 
 
-    //CHECK ANNEE VIDE
+    //CHECK RACE VIDE
 
-    const inputsAnnee = [kiloInput, cameraSelect, reclamationSelect, submitButton];
+    const inputsRace = [ageInput, descriptionInput, courrielInput, adresseInput, villeInput, codePostalInput, submitButton];
 
-    inputsAnnee.forEach(input => {
-        input.addEventListener('click', function() {
-            emptyOnClick(anneeInput, "Ce champs est vide.", anneeError);
+    inputsRace.forEach(input => {
+        input.addEventListener('focus', function() {
+            emptyOnClick(raceInput, "Ce champs est vide.", raceError);
+            submitButton.disabled = true;
         });
     });
 
-    //CHECK KILO VIDE
-    const inputsKilo = [cameraSelect, reclamationSelect, submitButton];
+    //CHECK AGE VIDE
+    const inputsAge = [descriptionInput, courrielInput, adresseInput, villeInput, codePostalInput, submitButton];
 
-    inputsKilo.forEach(input => {
-        input.addEventListener('click', function() {
-            emptyOnClick(kiloInput, "Ce champs est vide.", kiloError);
+    inputsAge.forEach(input => {
+        input.addEventListener('focus', function() {
+            emptyOnClick(ageInput, "Ce champs est vide.", ageError);
+            submitButton.disabled = true;
         });
     });  
 
-    //CHECK RECLAMATION 1 VIDE
-    const inputsRecOne = [twoReclamation, threeReclamation, fourReclamation, submitButton];
+    //CHECK DESCRIPTION VIDE
+    const inputsDescription = [courrielInput, adresseInput, villeInput, codePostalInput, submitButton];
 
-    inputsRecOne.forEach(input => {
-        input.addEventListener('click', function() {
-            emptyOnClick(oneReclamation, "Ce champs est vide.", oneReclamationError);
+    inputsDescription.forEach(input => {
+        input.addEventListener('focus', function() {
+            emptyOnClick(descriptionInput, "Ce champs est vide.", descriptionError);
+            submitButton.disabled = true;
         });
     });  
 
-    //CHECK RECLAMATION 2 VIDE
-    const inputsRecTwo = [threeReclamation, fourReclamation, submitButton];
+    //CHECK COURRIEL VIDE
+    const inputsCourriel = [adresseInput, villeInput, codePostalInput, submitButton];
 
-    inputsRecTwo.forEach(input => {
-        input.addEventListener('click', function() {
-            emptyOnClick(twoReclamation, "Ce champs est vide.", twoReclamationError);
+    inputsCourriel.forEach(input => {
+        input.addEventListener('focus', function() {
+            emptyOnClick(courrielInput, "Ce champs est vide.", courrielError);
+            submitButton.disabled = true;
         });
     });  
 
+    //CHECK ADRESSE VIDE
+    const inputsAdresse = [villeInput, codePostalInput, submitButton];
 
-    //CHECK RECLAMATION 3 VIDE
-    const inputsRecThree = [fourReclamation, submitButton];
-
-    inputsRecThree.forEach(input => {
-        input.addEventListener('click', function() {
-            emptyOnClick(threeReclamation, "Ce champs est vide.", threeReclamationError);
+    inputsAdresse.forEach(input => {
+        input.addEventListener('focus', function() {
+            emptyOnClick(adresseInput, "Ce champs est vide.", adresseError);
+            submitButton.disabled = true;
         });
     });  
 
-    const inputsRecFour= [submitButton];
+    //CHECK VILLE VIDE
+    const inputsVille= [codePostalInput, submitButton];
+    inputsVille.forEach(input => {
+        input.addEventListener('focus', function() {
+            emptyOnClick(villeInput, "Ce champs est vide.", villeError);
+            submitButton.disabled = true;
+        });
+    });
+
+    //CHECK CODE POSTAL VIDE
+    const inputsCodePostal = [submitButton];
+    inputsCodePostal.forEach(input => {
+        input.addEventListener('focus', function() {
+            emptyOnClick(codePostalInput, "Ce champs est vide.", codePostalError);
+            submitButton.disabled = true;
+        });
+    });
+
 });
+
+
 
 
 
 //******************************************
 //**         FUNCTION VALIDATIONS         **
 //******************************************
-
-
-
-
-
-
 
 //Pour les champs vides, envoyer message d'erreur
 function emptyOnClick(input, errorMessage, errorElement) {
@@ -302,110 +306,12 @@ function emptyOnClick(input, errorMessage, errorElement) {
     }
 }
 
-
-    
-// VALIDATE RECLAMATION NUMBER CONTENT 1, 2, 3, 4 :
-function validateReclamationInput(reclamation, Errormsg){
-    let errorMessage = "";
-    if (isNaN(reclamation.value)) {
-        errorMessage = "La valeur de votre reclamation doit contenir uniquement des chiffres.";
-    } else if (Number(reclamation.value) > 35000) {
-        errorMessage = "Désolé, nous n'avons aucun produit à offrir pour ce profil de client";
-    }
-
-    if (errorMessage) {
-        displayErrorMessage(errorMessage, Errormsg);
-        return { isValid: false, errorMessage: errorMessage };
-    } else {
-        clearErrorMessage(Errormsg);
-        return { isValid: true, errorMessage: "" };
-    }
-}
-
-
-function checkOverload(reclamation1, reclamation2, reclamation3, reclamation4, totalReclamationError){
-    let amount1 = Number(reclamation1.value);
-    let amount2 = Number(reclamation2.value);
-    let amount3 = Number(reclamation3.value);
-    let amount4 = Number(reclamation4.value);
-
-    let total = amount1+amount2+amount3+amount4;
-    if(total>35000){
-        displayErrorMessage("Désolé, nous n'avons aucun produit à offrir pour ce profil de client", totalReclamationError);
-        return false
-    }
-    if(total >25000){
-        return 700;
-    }
-    return 0;
-}
-
-//get nbr reclamation reeturn a int
-function getNbrReclamation(reclamationNumbers, reclamationSelect){
-    if(reclamationSelect.value === "non-reclamation"){
-        return 0;
-    }
-    if(reclamationNumbers.value === "une-reclamation"){
-        return 1;
-    }
-    if(reclamationNumbers.value === "deux-reclamation"){
-        return 2;
-    }
-    if(reclamationNumbers.value === "trois-reclamation"){
-        return 3;
-    }
-    if(reclamationNumbers.value === "quattre-reclamation"){
-        return 4;
-    }
-}
-
-//get rate base
-function getbaseRate(genreSelect,naissanceInput,voitureInput){
-    myValuedCar = Number(voitureInput.value);
-    if (genreSelect.value === "homme" || genreSelect.value === "non-binaire" && isAge(naissanceInput) < 25) {
-        return 0.05*myValuedCar //5%
-    }
-    else if (isAge(naissanceInput) <= 75) {
-        return 0.04*myValuedCar; //4%
-    }
-    return 0.015*myValuedCar; //1.5%
-}
-
-//get final rate
-function calculateAnnualRate(baseRate, nbrReclamation, kilo, totalReclamations){
-    let annualRate = baseRate + (350*nbrReclamation) + (0.02*kilo) + totalReclamations;
-    return annualRate;
-}
-
-//get monthly rate
-function calculateMonthlyRate(annualRate){
-    let monthlyRate = annualRate/12;
-    return monthlyRate;
-}
-
-function resetValues(reclamation1, reclamation2, reclamation3, reclamation4) {
-    reclamation1.value = "";
-    reclamation2.value = "";
-    reclamation3.value = "";
-    reclamation4.value = "";
-}
-
-
 //******************************************
 //**       FUNCTION OF EXECUTIONS         **
 //******************************************
 
-
-
 function displayErrorMessage(message, errorElement) {
     errorElement.textContent = message;
-}
-
-function clearErrorMessages() {
-    const errorElements = document.querySelectorAll(".error");
-    for (const errorElement of errorElements) {
-        errorElement.textContent = "";
-    }
 }
 
 function clearErrorMessage(errorElement) {
