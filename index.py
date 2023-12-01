@@ -19,6 +19,10 @@ from .database import Database
 
 app = Flask(__name__, static_url_path="", static_folder="static")
 
+@app.errorhandler(404)
+def page_not_found(error):
+    # print(error)
+    return render_template("404.html"), 404
 
 def get_db():
     db = getattr(g, '_database', None)
