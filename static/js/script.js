@@ -1,4 +1,3 @@
-// L'endroit où placer le code du front-end.
 window.addEventListener("load", function () {
     const nameInput = document.getElementById("nom");
     const especeInput = document.getElementById("espece");
@@ -216,87 +215,23 @@ window.addEventListener("load", function () {
     //**           IF EMPTY FIELDS            **
     //******************************************
 
-    //CHECK NOM VIDE
-    const inputsName = [especeInput, raceInput, ageInput, descriptionInput, courrielInput, adresseInput, villeInput, codePostalInput, submitButton];
-
-    inputsName.forEach(input => {
-        input.addEventListener('focus', function() {
-        emptyOnClick(nameInput, "Ce champs est vide.", nameError);
+    function checkEmpty(inputs, inputField, errorMessage, errorField) {
+        inputs.forEach(input => {
+            input.addEventListener('focus', function() {
+                emptyOnClick(inputField, errorMessage, errorField);
+            });
         });
-    });
-
-    //CHECK ESPECE VIDE
-
-    const inputsEspece = [raceInput, ageInput, descriptionInput, courrielInput, adresseInput, villeInput, codePostalInput, submitButton];
-
-    inputsEspece.forEach(input => {
-        input.addEventListener('focus', function() {
-            emptyOnClick(especeInput, "Ce champs est vide.", especeError);
-        });
-    });
-
-
-    //CHECK RACE VIDE
-
-    const inputsRace = [ageInput, descriptionInput, courrielInput, adresseInput, villeInput, codePostalInput, submitButton];
-
-    inputsRace.forEach(input => {
-        input.addEventListener('focus', function() {
-            emptyOnClick(raceInput, "Ce champs est vide.", raceError);
-        });
-    });
-
-    //CHECK AGE VIDE
-    const inputsAge = [descriptionInput, courrielInput, adresseInput, villeInput, codePostalInput, submitButton];
-
-    inputsAge.forEach(input => {
-        input.addEventListener('focus', function() {
-            emptyOnClick(ageInput, "Ce champs est vide.", ageError);
-        });
-    });  
-
-    // CHECK DESCRIPTION VIDE
-    const inputsDescription = [courrielInput, adresseInput, villeInput, codePostalInput, submitButton];
-
-    inputsDescription.forEach(input => {
-        input.addEventListener('focus', function() {
-            emptyOnClick(descriptionInput, "Ce champs est vide.", descriptionError);
-        });
-    });  
-
-    //CHECK COURRIEL VIDE
-    const inputsCourriel = [adresseInput, villeInput, codePostalInput, submitButton];
-
-    inputsCourriel.forEach(input => {
-        input.addEventListener('focus', function() {
-            emptyOnClick(courrielInput, "Ce champs est vide.", courrielError);
-        });
-    });  
-
-    //CHECK ADRESSE VIDE
-    const inputsAdresse = [villeInput, codePostalInput, submitButton];
-
-    inputsAdresse.forEach(input => {
-        input.addEventListener('focus', function() {
-            emptyOnClick(adresseInput, "Ce champs est vide.", adresseError);
-        });
-    });  
-
-    //CHECK VILLE VIDE
-    const inputsVille= [codePostalInput, submitButton];
-    inputsVille.forEach(input => {
-        input.addEventListener('focus', function() {
-            emptyOnClick(villeInput, "Ce champs est vide.", villeError);
-        });
-    });
-
-    //CHECK CODE POSTAL VIDE
-    const inputsCodePostal = [submitButton];
-    inputsCodePostal.forEach(input => {
-        input.addEventListener('focus', function() {
-            emptyOnClick(codePostalInput, "Ce champs est vide.", codePostalError);
-        });
-    });
+    }
+        
+    checkEmpty([especeInput, raceInput, ageInput, descriptionInput, courrielInput, adresseInput, villeInput, codePostalInput, submitButton], nameInput, "Ce champs est vide.", nameError);
+    checkEmpty([raceInput, ageInput, descriptionInput, courrielInput, adresseInput, villeInput, codePostalInput, submitButton], especeInput, "Ce champs est vide.", especeError);
+    checkEmpty([ageInput, descriptionInput, courrielInput, adresseInput, villeInput, codePostalInput, submitButton], raceInput, "Ce champs est vide.", raceError);
+    checkEmpty([descriptionInput, courrielInput, adresseInput, villeInput, codePostalInput, submitButton], ageInput, "Ce champs est vide.", ageError);
+    checkEmpty([courrielInput, adresseInput, villeInput, codePostalInput, submitButton], descriptionInput, "Ce champs est vide.", descriptionError);
+    checkEmpty([adresseInput, villeInput, codePostalInput, submitButton], courrielInput, "Ce champs est vide.", courrielError);
+    checkEmpty([villeInput, codePostalInput, submitButton], adresseInput, "Ce champs est vide.", adresseError);
+    checkEmpty([codePostalInput, submitButton], villeInput, "Ce champs est vide.", villeError);
+    checkEmpty([submitButton], codePostalInput, "Ce champs est vide.", codePostalError);
 
     function checkAllFields() {
         let allFields = [
@@ -328,8 +263,8 @@ window.addEventListener("load", function () {
             checkAllFields(); // Call the checkAllFields function here
         }
     }
-    
-    });
+
+});
 
 //******************************************
 //**       FUNCTION OF EXECUTIONS         **
