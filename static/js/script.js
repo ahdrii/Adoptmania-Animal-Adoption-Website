@@ -32,11 +32,11 @@ window.addEventListener("load", function () {
         let validation = validateName(nameInput.value);
         if (validation === false) {
             displayErrorMessage("Le nom de l'animal doit avoir entre 3 et 20 caractères sans virgule.", nameError);
-            submitButton.disabled = true;
         } else {
             clearErrorMessage(nameError);
-            submitButton.disabled = false;
         }
+        checkAllFields();
+
     });
 
     function validateName(nameInput) {
@@ -55,11 +55,11 @@ window.addEventListener("load", function () {
         let validation = validateEspece(especeInput.value);
         if (validation === false) {
             displayErrorMessage("L'entrée est invalide", especeError);
-            submitButton.disabled = true;
         } else {
             clearErrorMessage(especeError);
-            submitButton.disabled = false;
         }
+        checkAllFields();
+
     });
 
     function validateEspece(especeInput) {
@@ -76,11 +76,11 @@ window.addEventListener("load", function () {
         let validation = validateRace(raceInput.value);
         if (validation === false) {
             displayErrorMessage("L'entrée est invalide", raceError);
-            submitButton.disabled = true;
         } else {
             clearErrorMessage(raceError);
-            submitButton.disabled = false;
         }
+
+        checkAllFields();
     });
 
     function validateRace(raceInput) {
@@ -97,11 +97,11 @@ window.addEventListener("load", function () {
         let validation = validateAge(ageInput.value);
         if (validation === false) {
             displayErrorMessage("L'entree de l'age doit etre un chiffre entre 0 et 30.", ageError); 
-            submitButton.disabled = true;
         } else {
             clearErrorMessage(ageError);
-            submitButton.disabled = false;
         }
+        checkAllFields();
+
     });
 
     function validateAge(ageInput) {
@@ -117,14 +117,17 @@ window.addEventListener("load", function () {
     //CHECK DESCRIPTION
     descriptionInput.addEventListener('change', function() {
         let validation = validateDescription(descriptionInput.value);
-        if (validation === true) {
+        if (validation === false) {
+            displayErrorMessage("La description est invalide.", descriptionError);
+        } else {
             clearErrorMessage(descriptionError);
-            submitButton.disabled = false;
         }
+        checkAllFields();
+
     });
 
     function validateDescription(descriptionInput) {
-        if (descriptionInput==="") {
+        if (descriptionInput === "") {
             return false;
         }
         return true;
@@ -136,11 +139,11 @@ window.addEventListener("load", function () {
         let validation = validateCourriel(courrielInput.value);
         if (validation === false) {
             displayErrorMessage("L'entree est invalide", courrielError); 
-            submitButton.disabled = true;
         } else {
             clearErrorMessage(courrielError);
-            submitButton.disabled = false;
         }
+        checkAllFields();
+
     });
 
     function validateCourriel(courrielInput) {
@@ -156,11 +159,11 @@ window.addEventListener("load", function () {
         let validation = validateAdresse(adresseInput.value);
         if (validation === false) {
             displayErrorMessage("L'entree est invalide", adresseError); 
-            submitButton.disabled = true;
         } else {
             clearErrorMessage(adresseError);
-            submitButton.disabled = false;
         }
+        checkAllFields();
+
     });
 
     function validateAdresse(adresseInput) {
@@ -174,11 +177,11 @@ window.addEventListener("load", function () {
             let validation = validateVille(villeInput.value);
             if (validation === false) {
                 displayErrorMessage("L'entree est invalide", villeError); 
-                submitButton.disabled = true;
             } else {
                 clearErrorMessage(villeError);
-                submitButton.disabled = false;
             }
+            checkAllFields();
+
         });
 
         function validateVille(villeInput) {
@@ -194,11 +197,11 @@ window.addEventListener("load", function () {
         let validation = validateCodePostal(codePostalInput.value);
         if (validation === false) {
             displayErrorMessage("L'entree est invalide", codePostalError); 
-            submitButton.disabled = true;
         } else {
             clearErrorMessage(codePostalError);
-            submitButton.disabled = false;
         }
+        checkAllFields();
+
     });
 
     function validateCodePostal(codePostalInput) {
@@ -219,7 +222,6 @@ window.addEventListener("load", function () {
     inputsName.forEach(input => {
         input.addEventListener('focus', function() {
         emptyOnClick(nameInput, "Ce champs est vide.", nameError);
-        submitButton.disabled = true;
         });
     });
 
@@ -230,7 +232,6 @@ window.addEventListener("load", function () {
     inputsEspece.forEach(input => {
         input.addEventListener('focus', function() {
             emptyOnClick(especeInput, "Ce champs est vide.", especeError);
-            submitButton.disabled = true;
         });
     });
 
@@ -242,7 +243,6 @@ window.addEventListener("load", function () {
     inputsRace.forEach(input => {
         input.addEventListener('focus', function() {
             emptyOnClick(raceInput, "Ce champs est vide.", raceError);
-            submitButton.disabled = true;
         });
     });
 
@@ -252,17 +252,15 @@ window.addEventListener("load", function () {
     inputsAge.forEach(input => {
         input.addEventListener('focus', function() {
             emptyOnClick(ageInput, "Ce champs est vide.", ageError);
-            submitButton.disabled = true;
         });
     });  
 
-    //CHECK DESCRIPTION VIDE
+    // CHECK DESCRIPTION VIDE
     const inputsDescription = [courrielInput, adresseInput, villeInput, codePostalInput, submitButton];
 
     inputsDescription.forEach(input => {
         input.addEventListener('focus', function() {
             emptyOnClick(descriptionInput, "Ce champs est vide.", descriptionError);
-            submitButton.disabled = true;
         });
     });  
 
@@ -272,7 +270,6 @@ window.addEventListener("load", function () {
     inputsCourriel.forEach(input => {
         input.addEventListener('focus', function() {
             emptyOnClick(courrielInput, "Ce champs est vide.", courrielError);
-            submitButton.disabled = true;
         });
     });  
 
@@ -282,7 +279,6 @@ window.addEventListener("load", function () {
     inputsAdresse.forEach(input => {
         input.addEventListener('focus', function() {
             emptyOnClick(adresseInput, "Ce champs est vide.", adresseError);
-            submitButton.disabled = true;
         });
     });  
 
@@ -291,7 +287,6 @@ window.addEventListener("load", function () {
     inputsVille.forEach(input => {
         input.addEventListener('focus', function() {
             emptyOnClick(villeInput, "Ce champs est vide.", villeError);
-            submitButton.disabled = true;
         });
     });
 
@@ -300,27 +295,41 @@ window.addEventListener("load", function () {
     inputsCodePostal.forEach(input => {
         input.addEventListener('focus', function() {
             emptyOnClick(codePostalInput, "Ce champs est vide.", codePostalError);
-            submitButton.disabled = true;
         });
     });
 
-});
-
-
-
-
-
-//******************************************
-//**         FUNCTION VALIDATIONS         **
-//******************************************
-
-//Pour les champs vides, envoyer message d'erreur
-function emptyOnClick(input, errorMessage, errorElement) {
-    const inputValue = input.value.trim();
-    if (inputValue === "") {
-        displayErrorMessage(errorMessage, errorElement);
+    function checkAllFields() {
+        let allFields = [
+            validateName(nameInput.value),
+            validateEspece(especeInput.value),
+            validateRace(raceInput.value),
+            validateAge(ageInput.value),
+            validateDescription(descriptionInput.value),
+            validateCourriel(courrielInput.value),
+            validateAdresse(adresseInput.value),
+            validateVille(villeInput.value),
+            validateCodePostal(codePostalInput.value)
+        ];
+    
+        // If all fields are valid, enable the submit button
+        if (allFields.every(field => field === true)) {
+            submitButton.disabled = false;
+        } else {
+            submitButton.disabled = true;
+        }
     }
-}
+    function emptyOnClick(input, errorMessage, errorElement) {
+        const inputValue = input.value.trim();
+        if (inputValue === "") {
+            displayErrorMessage(errorMessage, errorElement);
+            submitButton.disabled = true;
+        } else {
+            clearErrorMessage(errorElement);
+            checkAllFields(); // Call the checkAllFields function here
+        }
+    }
+    
+    });
 
 //******************************************
 //**       FUNCTION OF EXECUTIONS         **

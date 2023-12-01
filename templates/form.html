@@ -4,12 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulaire de mise en adoption</title>
-    <script src="../static/js/script.js"></script>
 </head>
 <body>
+    <script src="../static/js/script.js"></script>
+
     <h1>Formulaire de mise en adoption</h1>
     <p>Remplissez le formulaire ci-dessous pour mettre votre animal en adoption</p>
-    <form method="post">
+    <form id="my-form" method="post" action="/submit-form">
         <label for="nom">Nom de l'animal de compagnie :</label>
         <input type="text" id="nom" name="nom">
         <div id="name-error"></div>
