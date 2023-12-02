@@ -20,7 +20,7 @@ window.addEventListener("load", function () {
     const codePostalError = document.getElementById("cp-error");
 
     const submitButton = document.getElementById("submit-button");
-
+    const emptyMsg = "Ce champs est vide.";
 
     //******************************************
     //**            EVENT LISTENERS           **
@@ -100,7 +100,6 @@ window.addEventListener("load", function () {
             clearErrorMessage(ageError);
         }
         checkAllFields();
-
     });
 
     function validateAge(ageInput) {
@@ -142,7 +141,6 @@ window.addEventListener("load", function () {
             clearErrorMessage(courrielError);
         }
         checkAllFields();
-
     });
 
     function validateCourriel(courrielInput) {
@@ -223,15 +221,15 @@ window.addEventListener("load", function () {
         });
     }
         
-    checkEmpty([especeInput, raceInput, ageInput, descriptionInput, courrielInput, adresseInput, villeInput, codePostalInput, submitButton], nameInput, "Ce champs est vide.", nameError);
-    checkEmpty([raceInput, ageInput, descriptionInput, courrielInput, adresseInput, villeInput, codePostalInput, submitButton], especeInput, "Ce champs est vide.", especeError);
-    checkEmpty([ageInput, descriptionInput, courrielInput, adresseInput, villeInput, codePostalInput, submitButton], raceInput, "Ce champs est vide.", raceError);
-    checkEmpty([descriptionInput, courrielInput, adresseInput, villeInput, codePostalInput, submitButton], ageInput, "Ce champs est vide.", ageError);
-    checkEmpty([courrielInput, adresseInput, villeInput, codePostalInput, submitButton], descriptionInput, "Ce champs est vide.", descriptionError);
-    checkEmpty([adresseInput, villeInput, codePostalInput, submitButton], courrielInput, "Ce champs est vide.", courrielError);
-    checkEmpty([villeInput, codePostalInput, submitButton], adresseInput, "Ce champs est vide.", adresseError);
-    checkEmpty([codePostalInput, submitButton], villeInput, "Ce champs est vide.", villeError);
-    checkEmpty([submitButton], codePostalInput, "Ce champs est vide.", codePostalError);
+    checkEmpty([especeInput, raceInput, ageInput, descriptionInput, courrielInput, adresseInput, villeInput, codePostalInput, submitButton], nameInput, emptyMsg, nameError);
+    checkEmpty([raceInput, ageInput, descriptionInput, courrielInput, adresseInput, villeInput, codePostalInput, submitButton], especeInput, emptyMsg, especeError);
+    checkEmpty([ageInput, descriptionInput, courrielInput, adresseInput, villeInput, codePostalInput, submitButton], raceInput, emptyMsg, raceError);
+    checkEmpty([descriptionInput, courrielInput, adresseInput, villeInput, codePostalInput, submitButton], ageInput, emptyMsg, ageError);
+    checkEmpty([courrielInput, adresseInput, villeInput, codePostalInput, submitButton], descriptionInput, emptyMsg, descriptionError);
+    checkEmpty([adresseInput, villeInput, codePostalInput, submitButton], courrielInput, emptyMsg, courrielError);
+    checkEmpty([villeInput, codePostalInput, submitButton], adresseInput, emptyMsg, adresseError);
+    checkEmpty([codePostalInput, submitButton], villeInput, emptyMsg, villeError);
+    checkEmpty([submitButton], codePostalInput, emptyMsg, codePostalError);
 
     function checkAllFields() {
         let allFields = [
@@ -259,16 +257,11 @@ window.addEventListener("load", function () {
             displayErrorMessage(errorMessage, errorElement);
             submitButton.disabled = true;
         } else {
-            clearErrorMessage(errorElement);
             checkAllFields(); // Call the checkAllFields function here
         }
     }
 
 });
-
-//******************************************
-//**       FUNCTION OF EXECUTIONS         **
-//******************************************
 
 function displayErrorMessage(message, errorElement) {
     errorElement.textContent = message;
