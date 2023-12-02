@@ -21,6 +21,7 @@ window.addEventListener("load", function () {
 
     const submitButton = document.getElementById("submit-button");
     const emptyMsg = "Ce champs est vide.";
+    const invalidMsg = "L'entrée est invalide.";
 
     //******************************************
     //**            EVENT LISTENERS           **
@@ -39,7 +40,7 @@ window.addEventListener("load", function () {
     });
 
     function validateName(nameInput) {
-        let regexString = /[^a-zA-ZéèêëàâäôöûüçÉÈÊËÀÂÄÔÖÛÜÇ\s-.'']/;
+        let regexString = /[^a-zA-ZéèêëàâäôöûüçÉÈÊËÀÂÄÔÖÛÜÇ\s-.'']/; //M. moustache est valide
         if (regexString.test(nameInput)) {
             return false;
         }
@@ -53,7 +54,7 @@ window.addEventListener("load", function () {
     especeInput.addEventListener('change', function() {
         let validation = validateEspece(especeInput.value);
         if (validation === false) {
-            displayErrorMessage("L'entrée est invalide", especeError);
+            displayErrorMessage(invalidMsg, especeError);
         } else {
             clearErrorMessage(especeError);
         }
@@ -74,7 +75,7 @@ window.addEventListener("load", function () {
     raceInput.addEventListener('change', function() {
         let validation = validateRace(raceInput.value);
         if (validation === false) {
-            displayErrorMessage("L'entrée est invalide", raceError);
+            displayErrorMessage(invalidMsg, raceError);
         } else {
             clearErrorMessage(raceError);
         }
@@ -116,7 +117,7 @@ window.addEventListener("load", function () {
     descriptionInput.addEventListener('change', function() {
         let validation = validateDescription(descriptionInput.value);
         if (validation === false) {
-            displayErrorMessage("La description est invalide.", descriptionError);
+            displayErrorMessage(invalidMsg, descriptionError);
         } else {
             clearErrorMessage(descriptionError);
         }
@@ -136,7 +137,7 @@ window.addEventListener("load", function () {
     courrielInput.addEventListener('change', function() {
         let validation = validateCourriel(courrielInput.value);
         if (validation === false) {
-            displayErrorMessage("L'entree est invalide", courrielError); 
+            displayErrorMessage(invalidMsg, courrielError); 
         } else {
             clearErrorMessage(courrielError);
         }
@@ -155,7 +156,7 @@ window.addEventListener("load", function () {
     adresseInput.addEventListener('change', function() {
         let validation = validateAdresse(adresseInput.value);
         if (validation === false) {
-            displayErrorMessage("L'entree est invalide", adresseError); 
+            displayErrorMessage(invalidMsg, adresseError); 
         } else {
             clearErrorMessage(adresseError);
         }
@@ -164,7 +165,7 @@ window.addEventListener("load", function () {
     });
 
     function validateAdresse(adresseInput) {
-        let regexAdresse = /^\d+\s+[a-zA-ZéèêëàâäôöûüçÉÈÊËÀÂÄÔÖÛÜÇ\s-]+$/;
+        let regexAdresse = /^\d+\s+[a-zA-ZéèêëàâäôöûüçÉÈÊËÀÂÄÔÖÛÜÇ\s-.'']+$/;
         return regexAdresse.test(adresseInput);
 
     }
@@ -173,7 +174,7 @@ window.addEventListener("load", function () {
         villeInput.addEventListener('change', function() { //input for debug'
             let validation = validateVille(villeInput.value);
             if (validation === false) {
-                displayErrorMessage("L'entree est invalide", villeError); 
+                displayErrorMessage(invalidMsg, villeError); 
             } else {
                 clearErrorMessage(villeError);
             }
@@ -182,7 +183,7 @@ window.addEventListener("load", function () {
         });
 
         function validateVille(villeInput) {
-            let villeRegex = /[^a-zA-ZéèêëàâäôöûüçÉÈÊËÀÂÄÔÖÛÜÇ\s-'']/;
+            let villeRegex = /[^a-zA-ZéèêëàâäôöûüçÉÈÊËÀÂÄÔÖÛÜÇ\s-.'']/;
             if (villeRegex.test(villeInput)) {//regex to get only letters (including accented ones) no ',' or numbers, etc
                 return false;
             }
@@ -190,10 +191,10 @@ window.addEventListener("load", function () {
         }
 
     //CHECK CODE POSTAL
-    codePostalInput.addEventListener('change', function() {
+    codePostalInput.addEventListener('input', function() {
         let validation = validateCodePostal(codePostalInput.value);
         if (validation === false) {
-            displayErrorMessage("L'entree est invalide", codePostalError); 
+            displayErrorMessage(invalidMsg, codePostalError); 
         } else {
             clearErrorMessage(codePostalError);
         }
