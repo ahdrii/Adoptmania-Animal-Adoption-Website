@@ -2,7 +2,7 @@
 
 # Équipe  :
 - Adriana Lisseth Gonzales Rodriguez GONA63570207
-- Ivett Graciela Chacaltana Espinoza [CODEPERMANENT]
+- Ivett Graciela Chacaltana Espinoza CHAI08539206
 
 # Instructions    :
 - instructions pour installer et exécuter le logiciel.

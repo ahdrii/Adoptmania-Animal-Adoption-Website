@@ -16,6 +16,8 @@ from flask import Flask
 from flask import render_template
 from flask import g
 from .database import Database
+from flask import redirect
+from flask import request
 
 app = Flask(__name__, static_url_path="", static_folder="static")
 
@@ -42,3 +44,22 @@ def close_connection(exception):
 def form():
     # À remplacer par le contenu de votre choix.
     return render_template('form.html')
+
+@app.route('/submit-form', methods=['POST'])
+def donnees_formulaire():
+    nom = request.form['nom']
+    espece = request.form['espece']
+    race = request.form['race']
+    age = request.form['age']
+    description = request.form['description']
+    courriel = request.form['courriel']
+    adresse = request.form['adresse']
+    ville = request.form['ville']
+    cp = request.form['cp']
+
+    db = Database() 
+    db.save_animal(nom, espece, race, age, description, courriel, adresse, ville, cp)
+
+    #  return render_template('formulaire.html', form_submitted=True)
+    return redirect(url_for('merci'))
+
