@@ -18,6 +18,7 @@ from flask import g
 from .database import Database
 from flask import redirect
 from flask import request
+from flask import url_for
 
 app = Flask(__name__, static_url_path="", static_folder="static")
 
@@ -39,11 +40,18 @@ def close_connection(exception):
     if db is not None:
         db.disconnect()
 
+@app.route('/search')
+def search():
+    query = request.args.get('query', '')
+    results = [animal for animal in animals if query.lower() in animal['name'].lower()]
+    return render_template('search_results.html', query=query, results=results)
 
 @app.route('/')
 def form():
     # À remplacer par le contenu de votre choix.
     return render_template('form.html')
+
+
 
 @app.route('/submit-form', methods=['POST'])
 def donnees_formulaire():
@@ -58,8 +66,16 @@ def donnees_formulaire():
     cp = request.form['cp']
 
     db = Database() 
-    db.save_animal(nom, espece, race, age, description, courriel, adresse, ville, cp)
+    animal_id = db.add_animal(nom, espece, race, age, description, courriel, adresse, ville, cp)
 
-    #  return render_template('formulaire.html', form_submitted=True)
-    return redirect(url_for('merci'))
+    return redirect(url_for('animal_added', animal_id=animal_id))
 
+@app.route('/animal/<int:animal_id>')
+def animal_added(animal_id):
+    db = get_db()
+    animal = db.get_animal(animal_id)
+
+    if animal is not None:
+        return render_template('animal_added.html', animal=animal)
+    else:
+        return render_template('404.html'), 404

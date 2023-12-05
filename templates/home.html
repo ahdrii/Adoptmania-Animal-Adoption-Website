@@ -1,26 +1,180 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet"
-    <title>Accueil</title>
-</head>
-<body>
-    <nav>
-        <ul>
-            <li><a href="home.html">Home</a></li>
-            <li><a href="form.html">Mise en Adoption</a></li>
-            <li><a href="contact.html">Contactez-nous</a></li>
-        </ul>
-    </nav>
-    <h1>Adoptmania</h1>
-    <h2>Amis disponibles</h2>
-    <p>Voici les animaux disponibles pour adoption: </p>
-    <form action="/search" method="GET">
-        <input type="text" name="query" placeholder="Search">
-        <input type="submit" value="Search">
-    </form>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet" />
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+        <link href="../static/css/styles.css" rel="stylesheet" />
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container px-5">
+                <a class="navbar-brand" href="#!">Adoptmania</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="#!">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#!">Mise en Adoption</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#!">Contactez-nous!</a></li>
+                        <li><form action="/search" method="GET">
+                            <input type="text" name="query" placeholder="Search">
+                            <input type="submit" value="Search">
+                        </form></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
 
-</body>
+        <div class="container-lg my-3">
+            <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+                <!-- Carousel indicators -->
+                <ol class="carousel-indicators">
+                    <li data-bs-target="#myCarousel" data-bs-slide-to="0" class="active"></li>
+                    <li data-bs-target="#myCarousel" data-bs-slide-to="1"></li>
+                    <li data-bs-target="#myCarousel" data-bs-slide-to="2"></li>
+                </ol>
+                
+                <!-- Wrapper for carousel items -->
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="../static/img/carousel1.jpg" class="d-block w-100" alt="Slide 1">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="../static/img/carousel2.jpg" class="d-block w-100" alt="Slide 2">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="../static/img/carousel3.jpg" class="d-block w-100" alt="Slide 3">
+                    </div>
+                </div>
+        
+                <!-- Carousel controls -->
+                <a class="carousel-control-prev" href="#myCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon"></span>
+                </a>
+                <a class="carousel-control-next" href="#myCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon"></span>
+                </a>
+            </div>
+        </div>
+
+        <header class="bg-dark py-5">
+            <div class="container px-5">
+                <div class="row gx-5 justify-content-center">
+                    <div class="col-lg-6">
+                        <div class="text-center my-5">
+                            <h1 class="display-5 fw-bolder text-white mb-2">Adoptmania</h1>
+                            <p class="lead text-white-50 mb-4">Nous sommes ravis de vous accueillir dans notre refuge dédié à l'amour des animaux. <br>
+                                Explorez notre site pour découvrir des compagnons fidèles en quête d'un foyer chaleureux. <br>
+                                Chaque adoption ici est une histoire d'amour en devenir. <br>
+                                Préparez-vous à ouvrir votre cœur et à partager une vie pleine de joie avec nos adorables pensionnaires.<br>
+                                Bienvenue dans notre famille, <br>
+                                L'équipe du Centre d'Adoption "Adoptmania"</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+       
+
+        <section class="py-5 border-bottom" id="features">
+            <div class="container px-5 my-5">
+                <div class="row gx-5">
+                    <div class="col-lg-4 mb-5 mb-lg-0">
+                        <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-collection"></i></div>
+                        <h2 class="h4 fw-bolder">Perrito</h2>
+                        <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
+                        <a class="text-decoration-none" href="#!">
+                            Call to action
+                            <i class="bi bi-arrow-right"></i>
+                        </a>
+                    </div>
+                    <div class="col-lg-4 mb-5 mb-lg-0">
+                        <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-building"></i></div>
+                        <h2 class="h4 fw-bolder">Gatito</h2>
+                        <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
+                        <a class="text-decoration-none" href="#!">
+                            Call to action
+                            <i class="bi bi-arrow-right"></i>
+                        </a>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-toggles2"></i></div>
+                        <h2 class="h4 fw-bolder">Conejito</h2>
+                        <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
+                        <a class="text-decoration-none" href="#!">
+                            Call to action
+                            <i class="bi bi-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials section-->
+        <section class="py-5 border-bottom">
+            <div class="container px-5 my-5 px-5">
+                <div class="text-center mb-5">
+                    <h2 class="fw-bolder">Témoignage d'adoptantes</h2>
+                    <p class="lead mb-0">Les adoptantes sont 100 % satisfaits!</p>
+                </div>
+                <div class="row gx-5 justify-content-center">
+                    <div class="col-lg-6">
+                        <!-- Testimonial 1-->
+                        <div class="card mb-4">
+                            <div class="card-body p-4">
+                                <div class="d-flex">
+                                    <div class="flex-shrink-0"><i class="bi bi-chat-right-quote-fill text-primary fs-1"></i></div>
+                                    <div class="ms-4">
+                                        <p class="mb-1">"Adopter mon chaton chez "Adoptmania" a été la meilleure décision de ma vie. Il apporte tant de bonheur à la maison avec ses ronronnements et sa personnalité espiègle. Merci de m'avoir aidée à trouver mon compagnon à quatre pattes parfait!"</p>
+                                        <div class="small text-muted">- Sophie, Amoureuse de Félins</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Testimonial 2-->
+                        <div class="card">
+                            <div class="card-body p-4">
+                                <div class="d-flex">
+                                    <div class="flex-shrink-0"><i class="bi bi-chat-right-quote-fill text-primary fs-1"></i></div>
+                                    <div class="ms-4">
+                                        <p class="mb-1">"Notre famille est maintenant complète grâce à l'adoption d'un chien adorable. Il est devenu le meilleur ami de nos enfants et apporte une énergie positive à la maison. Merci au Centre d'Adoption pour cette expérience exceptionnelle."</p>
+                                        <div class="small text-muted">- Émile, Une famille complète</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="py-5 bg-dark">
+            <div class="container px-5"><p class="m-0 text-center text-white">Copyright &copy; Adoptmania 2023</p></div>
+        </footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+        
+        <!--<nav>
+            <ul>
+                <li><a href="home.html">Home</a></li>
+                <li><a href="form.html">Mise en Adoption</a></li>
+                <li><a href="contact.html">Contactez-nous</a></li>
+            </ul>
+        </nav>
+        
+        <h1>Adoptmania</h1>
+        <h2>Amis disponibles</h2>
+        <p>Voici les animaux disponibles pour adoption: </p>
+        <form action="/search" method="GET">
+            <input type="text" name="query" placeholder="Search">
+            <input type="submit" value="Search">
+        </form>
+        -->
+    </body>
 </html>
