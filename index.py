@@ -33,13 +33,6 @@ def get_db():
         g._database = Database()
     return g._database
 
-
-@app.teardown_appcontext
-def close_connection(exception):
-    db = getattr(g, '_database', None)
-    if db is not None:
-        db.disconnect()
-
 @app.route('/search')
 def search():
     query = request.args.get('query', '')
@@ -47,11 +40,13 @@ def search():
     return render_template('search_results.html', query=query, results=results)
 
 @app.route('/')
-def form():
+def home():
     # À remplacer par le contenu de votre choix.
+    return render_template('home.html')
+
+@app.route('/form')
+def form():
     return render_template('form.html')
-
-
 
 @app.route('/submit-form', methods=['POST'])
 def donnees_formulaire():
@@ -79,3 +74,10 @@ def animal_added(animal_id):
         return render_template('animal_added.html', animal=animal)
     else:
         return render_template('404.html'), 404
+    
+@app.teardown_appcontext
+def close_connection(exception):
+    db = getattr(g, '_database', None)
+    if db is not None:
+        db.disconnect()
+
