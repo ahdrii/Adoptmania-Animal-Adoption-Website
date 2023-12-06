@@ -27,7 +27,7 @@ window.addEventListener("load", function () {
     //**            EVENT LISTENERS           **
     //******************************************
 
-    // CHECK NAME    done
+    // CHECK NAME
     nameInput.addEventListener('change', function() {
         let validation = validateName(nameInput.value);
         if (validation === false) {
@@ -40,11 +40,11 @@ window.addEventListener("load", function () {
     });
 
     function validateName(nameInput) {
-        let regexString = /[^a-zA-ZéèêëàâäôöûüçÉÈÊËÀÂÄÔÖÛÜÇ\s-.'']/; //M. moustache est valide
+        let regexString = /[^a-zA-ZéèêëàâäôöûüçÉÈÊËÀÂÄÔÖÛÜÇ\s-.'']/; // This regex== #@$@#$32432423 donc M. moustache est valide
         if (regexString.test(nameInput)) {
             return false;
         }
-        else if (nameInput.length < 3 || nameInput.length > 20) {
+        else if (nameInput.length < 3 || nameInput.length > 25) {
             return false;
         }
         return true;
@@ -165,7 +165,7 @@ window.addEventListener("load", function () {
     });
 
     function validateAdresse(adresseInput) {
-        let regexAdresse = /^\d+\s+[a-zA-ZéèêëàâäôöûüçÉÈÊËÀÂÄÔÖÛÜÇ\s-.'']+$/;
+        let regexAdresse = /^\d+\s+[a-zA-ZéèêëàâäôöûüçÉÈÊËÀÂÄÔÖÛÜÇ\s-'']+$/;
         return regexAdresse.test(adresseInput);
 
     }
@@ -203,7 +203,7 @@ window.addEventListener("load", function () {
     });
 
     function validateCodePostal(codePostalInput) {
-        let myRegex = new RegExp("^[ABCEGHJKLMNPRSTVXY][0-9][ABCEGHJKLMNPRSTVWXYZ] ?[0-9][ABCEGHJKLMNPRSTVWXYZ][0-9]$"); //regex for postal code
+        let myRegex = new RegExp("^[ABCEGHJKLMNPRSTVXY][0-9][ABCEGHJKLMNPRSTVWXYZ] [0-9][ABCEGHJKLMNPRSTVWXYZ][0-9]$"); //regex for postal code
         if(myRegex.test(codePostalInput)){
             return true;
         }

@@ -3,43 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/css/myFormStyle.css">
     <title>Formulaire de mise en adoption</title>
 </head>
 <body>
 
     <h1>Formulaire de mise en adoption</h1>
-    <p>Remplissez le formulaire ci-dessous pour mettre votre animal en adoption</p>
-    <form id="my-form" method="post" action="/submit-form"> <!-- action="/submit-form" NEEDS TO BE REPLACED BY REDIRECT TO  THE POST CREATED (NEED PYTHON) -->
-        <label for="nom">Nom de l'animal de compagnie :</label>
-        <input type="text" id="nom" name="nom">
-        <div id="name-error"></div>
-        <label for="espece">Espece :</label>
-        <input type="text" id="espece" name="espece">
-        <div id="espece-error"></div>
-        <label for="race">Race :</label>
-        <input type="text" id="race" name="race">
-        <div id="race-error"></div>
-        <label for="age">Age :</label>
-        <input type="text" id="age" name="age">
-        <div id="age-error"></div>
-        <label for="description">Description :</label>
-        <input type="text" id="description" name="description">
-        <div id="description-error"></div>
-        <label for="email">Email:</label>
-        <input type="email" id="courriel" name="courriel">
-        <div id="courriel-error"></div>
-        <label for="adresse">Adresse :</label>
-        <input type="text" id="adresse" name="adresse">
-        <div id="adresse-error"></div>
-        <label for="ville">Ville :</label>
-        <input type="text" id="ville" name="ville">
-        <div id="ville-error"></div>
-        <label for="cp">Code postal :</label>
-        <input type="text" id="cp" name="cp">
-        <div id="cp-error"></div>
-        <br>
-        <input id="submit-button" type="submit" value="Submit">
-    </form>
+    <div id="myDivP">
+        <p>Remplissez le formulaire ci-dessous pour mettre votre animal en adoption</p>
+    </div>
+        <form id="my-form" method="post" action="/submit-form"> <!-- action="/submit-form" NEEDS TO BE REPLACED BY REDIRECT TO  THE POST CREATED (NEED PYTHON) -->
+            <label for="nom">Nom de l'animal de compagnie :</label>
+            <input type="text" id="nom" name="nom">
+            <div id="name-error" class="error"></div>
+                <label for="espece">Espece :</label>
+                <input type="text" id="espece" name="espece">
+            <div id="espece-error" class="error"></div>
+                <label for="race">Race :</label>
+            <input type="text" id="race" name="race">
+            <div id="race-error" class="error"></div>
+                <label for="age">Age :</label>
+                <input type="text" id="age" name="age">
+            <div id="age-error" class="error"></div>
+                <label for="description">Description :</label>
+                <input type="text" id="description" name="description">
+            <div id="description-error" class="error"></div>
+                <label for="email">Courriel :</label>
+                <input type="email" id="courriel" name="courriel">
+            <div id="courriel-error" class="error"></div>
+                <label for="adresse">Adresse :</label>
+                <input type="text" id="adresse" name="adresse">
+            <div id="adresse-error" class="error"></div>
+                <label for="ville">Ville :</label>
+                <input type="text" id="ville" name="ville">
+            <div id="ville-error" class="error"></div>
+                <label for="cp">Code postal :</label>
+                <input type="text" id="cp" name="cp">
+            <div id="cp-error" class="error"></div>
+            <br>
+            <input id="submit-button" type="submit" value="Submit">
+        </form>
     <script src="../static/js/script.js"></script>
 </body>
 </html>
