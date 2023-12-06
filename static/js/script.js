@@ -44,7 +44,7 @@ window.addEventListener("load", function () {
         if (regexString.test(nameInput)) {
             return false;
         }
-        else if (nameInput.length < 3 || nameInput.length > 25) {
+        else if (nameInput.length < 1 || nameInput.length > 25) {
             return false;
         }
         return true;

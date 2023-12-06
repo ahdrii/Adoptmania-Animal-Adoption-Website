@@ -4,12 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>404</title>
-    <link rel="stylesheet" href="../static/css/my404Style.css">
+    <link href="{{ url_for('static', filename='css/my404Style.css') }}" rel="stylesheet" />
+
 </head>
 <body>
     <div>
         <div id="imgContainer">
-            <img src="../static/img/test.png" alt="logo de adoptmania coupé">
+            <img src="{{ url_for('static', filename='img/test.png') }}" alt="logo de adoptmania coupé">
+
         </div>
         <div id="box">
             <p>Oops! <br> Erreur <br> 404</p>

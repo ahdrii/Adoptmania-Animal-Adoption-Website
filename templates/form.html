@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../static/css/myFormStyle.css">
+    <link href="{{ url_for('static', filename='css/myFormStyle.css') }}" rel="stylesheet" />
     <title>Formulaire de mise en adoption</title>
 </head>
 <body>
@@ -12,7 +12,7 @@
     <div id="myDivP">
         <p>Remplissez le formulaire ci-dessous pour mettre votre animal en adoption</p>
     </div>
-        <form id="my-form" method="post" action="/submit-form"> <!-- action="/submit-form" NEEDS TO BE REPLACED BY REDIRECT TO  THE POST CREATED (NEED PYTHON) -->
+        <form id="my-form" method="post" action="{{ url_for('submit') }}">
             <label for="nom">Nom de l'animal de compagnie :</label>
             <input type="text" id="nom" name="nom">
             <div id="name-error" class="error"></div>
@@ -43,6 +43,6 @@
             <br>
             <input id="submit-button" type="submit" value="Submit">
         </form>
-    <script src="../static/js/script.js"></script>
+        <script src="{{ url_for('static', filename='js/script.js') }}"></script>    
 </body>
 </html>
