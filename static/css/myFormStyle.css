@@ -1,23 +1,12 @@
-*{
-    padding: 0;
-    margin: auto;
-}
-body{
-    font-family: 'Arial', sans-serif;
-    background-color: #f8f8f8;
-    margin: 0;
-    padding: 0;}
-br{
-    padding-top: 10px;
-}
-h1{
+#titre {
     padding-top: 30px;
     text-align: center;
     padding-bottom: 30px;
     color: #333;
     text-align: center;
 }
-form{
+
+#my-form {
     text-align: center;
     max-width: 600px;
     margin: 20px auto;
@@ -27,13 +16,12 @@ form{
     border-radius: 8px;
 }
 
-label {
+#my-form label {
     display: block;
     margin-bottom: 8px;
 }
 
-select,
-input {
+#my-form select, #my-form input {
     width: 100%;
     padding: 10px;
     margin-bottom: 15px;
@@ -41,18 +29,6 @@ input {
     border: 1px solid #ccc;
     border-radius: 4px;
 }
-
-textarea {
-    width: 100%;
-    height: 100px;
-    padding: 10px;
-    margin-bottom: 15px;
-    box-sizing: border-box;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    resize: vertical;
-}
-
 
 #submit-button {
     background-color: #4CAF50;
@@ -62,12 +38,14 @@ textarea {
     border-radius: 4px;
     cursor: pointer;
 }
-#myDivP{
+
+#myDivP {
     text-align: center;
     font-size: 20px;
     font-weight: bold;
     color: #322482;
 }
+
 #submit-button:hover {
     background-color: #45a049;
 }
@@ -77,49 +55,7 @@ textarea {
     color: #666666;
 }
 
-#resetButton input {
-    background-color: #f44336;
-    color: white;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-#resetButton input:hover {
-    background-color: #d32f2f;
-}
-
-
-#annual-rate,
-#monthly-rate {
-    margin-top: 20px;
-    font-weight: bold;
-}
-
-.navbar {
-    background-color: #333;
-    overflow: hidden;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-bottom: 14px;
-    font-size: 20px; 
-    margin: 0 auto;
-
-}
-
 .error{
     color: red;
     padding-bottom: 20px;
-}
-.maCompagnie p {
-    display: block;
-    color: white;
-    text-align: center;
-    text-decoration: none;
-    font-family: 'Brush Script MT';
-    font-size: 80px; 
-    font-weight: 50; 
-    
 }

@@ -1,15 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Animal Details</title>
-</head>
-<body>
-    <h1>Animal Details</h1>
-    <ul>
-        <li>Name: {{ animal.nom }}</li>
-        <li>Species: {{ animal.espece }}</li>
+{% extends "base.html" %}
+
+{% block title %}
+Page de {{ animal.nom }}
+{% endblock %}
+
+
+{% block content %}
+<div class="container mx-auto text-center">
+    <h1 class="my-4">Page de {{ animal.nom }}</h1>
+    <img src="{{ url_for('static', filename='img/logo.png') }}" class="img-thumbnail rounded mx-auto d-block w-25 h-25" alt="Logo d'Adoptmania">
+    <ul class="list-group mx-auto text-center my-5 fs-3">
+        <li class="list-group-item">Nom: {{ animal.nom }}</li>
+        <li class="list-group-item">Espece: {{ animal.espece }}</li>
+        <li class="list-group-item">Race: {{ animal.race }}</li>
+        <li class="list-group-item">Age: {{ animal.age }}</li>
+        <li class="list-group-item">Description: {{ animal.description }}</li>
+        <li class="list-group-item">Courriel: {{ animal.courriel }}</li>
+        <li class="list-group-item">Address: {{ animal.adresse }}</li>
+        <li class="list-group-item">Ville: {{ animal.ville }}</li>
+        <li class="list-group-item">Code postal: {{ animal.cp }}</li>
     </ul>
-</body>
-</html>
+</div>
+
+{% endblock %}

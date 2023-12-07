@@ -19,13 +19,12 @@ from .database import Database
 from flask import redirect
 from flask import request
 from flask import url_for
-import re # import regex
+import re 
 
 app = Flask(__name__, static_url_path="", static_folder="static")
 
 @app.errorhandler(404)
 def page_not_found(error):
-    # print(error)
     return render_template("404.html"), 404
 
 def get_db():
@@ -42,8 +41,9 @@ def get_db():
 
 @app.route('/')
 def home():
-    # À remplacer par le contenu de votre choix.
-    return render_template('home.html')
+    db = Database()
+    animals = db.get_random_animals(5)
+    return render_template('home.html', animals=animals)
 
 @app.route('/form')
 def form():
@@ -74,53 +74,30 @@ def submit():
             not validate_ville(ville) or not validate_code_postal(cp)):
             return render_template("formulaire.html", error="Erreur dans le formulaire")
         else:
-            # Si les champs sont valide, ajouter l'animal à la base de données <----------------- TODO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
             db = Database()
             animal_id = db.add_animal(nom, espece, race, age, description, courriel, adresse, ville, cp)
 
             # Redirige vers la page de liste <------------------------------------DEBUG POUR VERIFIER QUE LES VALIDATIONS MARCHENT!!!!!!!!
-            return redirect(url_for('home')), 301
-
-#####################
-#   OLD CODE        #
-#####################
+            return redirect(url_for('animal_added', animal_id=animal_id)), 301
 
 
-# @app.route('/submit-form', methods=['POST'])
-# def donnees_formulaire():
-#     nom = request.form['nom']
-#     espece = request.form['espece']
-#     race = request.form['race']
-#     age = request.form['age']
-#     description = request.form['description']
-#     courriel = request.form['courriel']
-#     adresse = request.form['adresse']
-#     ville = request.form['ville']
-#     cp = request.form['cp']
+@app.route('/animal/<int:animal_id>')
+def animal_added(animal_id):
+    db = Database()
+    animal = db.get_animal(animal_id)
 
-#     db = Database() 
-#     animal_id = db.add_animal(nom, espece, race, age, description, courriel, adresse, ville, cp)
-
-#     return redirect(url_for('animal_added', animal_id=animal_id))
-
-
-# @app.route('/animal/<int:animal_id>')
-# def animal_added(animal_id):
-#     db = get_db()
-#     animal = db.get_animal(animal_id)
-
-#     if animal is not None:
-#         return render_template('animal_added.html', animal=animal)
-#     else:
-#         return render_template('404.html'), 404
-
-#######################################################################################################################
+    if animal is not None:
+        return render_template('animal_added.html', animal=animal)
+    else:
+        return render_template('404.html'), 404
 
 @app.teardown_appcontext
 def close_connection(exception):
     db = getattr(g, '_database', None)
     if db is not None:
         db.disconnect()
+
+
 
 #####################
 #   Validations     #

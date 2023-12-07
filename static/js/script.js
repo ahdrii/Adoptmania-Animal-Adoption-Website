@@ -40,7 +40,7 @@ window.addEventListener("load", function () {
     });
 
     function validateName(nameInput) {
-        let regexString = /[^a-zA-ZéèêëàâäôöûüçÉÈÊËÀÂÄÔÖÛÜÇ\s-.'']/; // This regex== #@$@#$32432423 donc M. moustache est valide
+        let regexString = /[^a-zA-ZéèêëàâäôöûüçÉÈÊËÀÂÄÔÖÛÜÇ\s-.'']/; // This regex == #@$@#$32432423 donc M. moustache est valide
         if (regexString.test(nameInput)) {
             return false;
         }
@@ -171,24 +171,24 @@ window.addEventListener("load", function () {
     }
 
     //CHECK VILLE
-        villeInput.addEventListener('change', function() { //input for debug'
-            let validation = validateVille(villeInput.value);
-            if (validation === false) {
-                displayErrorMessage(invalidMsg, villeError); 
-            } else {
-                clearErrorMessage(villeError);
-            }
+    villeInput.addEventListener('change', function() { //input for debug'
+        let validation = validateVille(villeInput.value);
+        if (validation === false) {
+            displayErrorMessage(invalidMsg, villeError); 
+        } else {
+            clearErrorMessage(villeError);
+        }
             checkAllFields();
 
-        });
+    });
 
-        function validateVille(villeInput) {
-            let villeRegex = /[^a-zA-ZéèêëàâäôöûüçÉÈÊËÀÂÄÔÖÛÜÇ\s-.'']/;
-            if (villeRegex.test(villeInput)) {//regex to get only letters (including accented ones) no ',' or numbers, etc
-                return false;
-            }
-            return true;
+    function validateVille(villeInput) {
+        let villeRegex = /[^a-zA-ZéèêëàâäôöûüçÉÈÊËÀÂÄÔÖÛÜÇ\s-.'']/;
+        if (villeRegex.test(villeInput)) {//regex to get only letters (including accented ones) no ',' or numbers, etc
+            return false;
         }
+        return true;
+    }
 
     //CHECK CODE POSTAL
     codePostalInput.addEventListener('input', function() {
@@ -252,16 +252,16 @@ window.addEventListener("load", function () {
             submitButton.disabled = true;
         }
     }
+
     function emptyOnClick(input, errorMessage, errorElement) {
         const inputValue = input.value.trim();
         if (inputValue === "") {
             displayErrorMessage(errorMessage, errorElement);
             submitButton.disabled = true;
         } else {
-            checkAllFields(); // Call the checkAllFields function here
+            checkAllFields(); 
         }
     }
-
 });
 
 function displayErrorMessage(message, errorElement) {
