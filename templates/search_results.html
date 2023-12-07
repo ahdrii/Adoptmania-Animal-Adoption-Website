@@ -5,11 +5,13 @@
 {% endblock %}
 
 {% block content %}
+    <h1 class="my-4 text-primary">Résultats de la recherche:</h1>
     {% for animal in animals %}
-    <div>
+    <div class="my-5 border p-3">
         <h2>{{ animal.nom }}</h2>
         <p>{{ animal.description }}</p>
         <a href="{{ url_for('animal_added', animal_id=animal.id) }}">Cliquez pour plus d'infos...</a>
+        <br>
     </div>
     {% endfor %}
 

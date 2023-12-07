@@ -37,18 +37,16 @@ def get_db():
 def search():
     query = request.args.get('query')
     animals = search_animals(query)
-    print(animals) 
     return render_template('search_results.html', animals=animals)
 
 def search_animals(query):
     db = Database()
     cursor = db.get_connection().cursor()
-    query = ("select id, nom, espece, race, age, description, courriel, "
+    sql_query = ("select id, nom, espece, race, age, description, courriel, "
              "adresse, ville, cp from animaux where nom like ? or espece like ? or race like ?"
              "or age like ? or description like ? or courriel like ? or adresse like ? or ville like ? or cp like ?")
-    cursor.execute(query, ('%' + query + '%', '%' + query + '%', '%' + query + '%', 
-                           '%' + query + '%', '%' + query + '%', '%' + query + '%', 
-                           '%' + query + '%', '%' + query + '%', '%' + query + '%'))
+    params = ('%' + query + '%',) * 9
+    cursor.execute(sql_query, params)
     all_data = cursor.fetchall()
     return [_build_animal(item) for item in all_data]
 
