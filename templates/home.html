@@ -64,8 +64,14 @@
                     {% for animal in animals %}
                     <div class="col-lg-2 mb-5 mb-lg-0">
                         <div class="feature bg-warning bg-gradient text-white rounded-3 mb-3"><i class="bi bi-heart"></i></div>
-                        <h2 class="h4 fw-bolder">{{ animal.nom }}</h2>
-                        <p>{{ animal.race }} , {{ animal.age }}</p>
+                        <h2 class="h4 fw-bolder justify-content-center">{{ animal.nom }}</h2>
+                        <ul class="justify-content-center">
+                            <li>{{ animal.espece }}</li>
+                            <li>{{ animal.race }}</li>
+                            <li>{{ animal.age }}</li>
+                            <li>{{ animal.ville }}</li>
+                            <li>{{ animal.cp }}</li>
+                        </ul>
                         <a class="text-decoration-none" href="{{ url_for('animal_added', animal_id=animal.id) }}">
                             Click pour plus d'infos
                             <i class="bi bi-arrow-right"></i>

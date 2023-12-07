@@ -33,17 +33,55 @@ def get_db():
         g._database = Database()
     return g._database
 
-# @app.route('/search')
-# def search():
-#     query = request.args.get('query', '')
-#     results = [animal for animal in animals if query.lower() in animal['name'].lower()]
-#     return render_template('search_results.html', query=query, results=results)
+@app.route('/search')
+def search():
+    query = request.args.get('query')
+    animals = search_animals(query)
+    print(animals) 
+    return render_template('search_results.html', animals=animals)
+
+def search_animals(query):
+    db = Database()
+    cursor = db.get_connection().cursor()
+    query = ("select id, nom, espece, race, age, description, courriel, "
+             "adresse, ville, cp from animaux where nom like ? or espece like ? or race like ?"
+             "or age like ? or description like ? or courriel like ? or adresse like ? or ville like ? or cp like ?")
+    cursor.execute(query, ('%' + query + '%', '%' + query + '%', '%' + query + '%', 
+                           '%' + query + '%', '%' + query + '%', '%' + query + '%', 
+                           '%' + query + '%', '%' + query + '%', '%' + query + '%'))
+    all_data = cursor.fetchall()
+    return [_build_animal(item) for item in all_data]
 
 @app.route('/')
 def home():
-    db = Database()
-    animals = db.get_random_animals(5)
+    animals = get_random_animals(5)
     return render_template('home.html', animals=animals)
+
+def get_random_animals(nombre_animaux):
+    db = Database()
+    cursor = db.get_connection().cursor()
+    query = ("select id, nom, espece, race, age, description, courriel, "
+            "adresse, ville, cp from animaux order by RANDOM() limit ?")
+    cursor.execute(query, (nombre_animaux,))
+    all_data = cursor.fetchall()
+    return [_build_animal(item) for item in all_data]
+
+#podemos definir build_animal en database.py y importarlo aqui??? porque no esta dentro de la clase
+
+def _build_animal(result_set_item):
+    animal = {}
+    animal["id"] = result_set_item[0]
+    animal["nom"] = result_set_item[1]
+    animal["espece"] = result_set_item[2]
+    animal["race"] = result_set_item[3]
+    animal["age"] = result_set_item[4]
+    animal["description"] = result_set_item[5]
+    animal["courriel"] = result_set_item[6]
+    animal["adresse"] = result_set_item[7]
+    animal["ville"] = result_set_item[8]
+    animal["cp"] = result_set_item[9]
+    return animal
+
 
 @app.route('/form')
 def form():

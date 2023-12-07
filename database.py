@@ -74,11 +74,3 @@ class Database:
         lastId = cursor.fetchone()[0]
         connection.commit()
         return lastId
-
-    def get_random_animals(self, nombre_animaux):
-        cursor = self.get_connection().cursor()
-        query = ("select id, nom, espece, race, age, description, courriel, "
-                "adresse, ville, cp from animaux order by RANDOM() limit ?")
-        cursor.execute(query, (nombre_animaux,))
-        all_data = cursor.fetchall()
-        return [_build_animal(item) for item in all_data]
