@@ -1,15 +1,15 @@
-#divContainer{
+.divContainer{
     background-image: url(../img/bg.png);
 }
 
-#box{
+.box{
     display: flex;
     text-align: center;
     padding-bottom: 5px;
     z-index: 1;
 }
 
-#box p{
+.box p{
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     margin: auto;
     background-color: transparent;
@@ -21,14 +21,14 @@
 }
 
 @media screen and (max-width: 600px) {
-    #box p {
+    .box p {
         font-size: 10vh;
     }
 }
 
 
 
-#myText{
+.myText{
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     padding-top: 50px;
     display: flex;
@@ -38,7 +38,7 @@
     z-index: 1;
 }
 
-#myText p{
+.myText p{
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     text-align: center;
     margin: auto;
@@ -50,7 +50,7 @@
 }
 
 @media screen and (max-width: 600px) {
-    #myText p{
+    .myText p{
         font-size: 10vh;
     }
 }
