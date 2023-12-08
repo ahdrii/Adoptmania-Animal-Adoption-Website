@@ -1,0 +1,56 @@
+#divContainer{
+    background-image: url(../img/bg.png);
+}
+
+#box{
+    display: flex;
+    text-align: center;
+    padding-bottom: 5px;
+    z-index: 1;
+}
+
+#box p{
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    margin: auto;
+    background-color: transparent;
+    display: flex;
+    color: #379b85;
+    text-shadow: 2px 2px 7px black;
+    font-size: 20vh;
+    z-index: 1;
+}
+
+@media screen and (max-width: 600px) {
+    #box p {
+        font-size: 10vh;
+    }
+}
+
+
+
+#myText{
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    padding-top: 50px;
+    display: flex;
+    color: black;
+    font-size: 5vh;
+    font-weight: bold;
+    z-index: 1;
+}
+
+#myText p{
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    text-align: center;
+    margin: auto;
+    color: rgb(255, 255, 255);
+    font-size: 8vh;
+    z-index: 1;
+    text-shadow: 2px 2px 7px black;
+    background-color: transparent;
+}
+
+@media screen and (max-width: 600px) {
+    #myText p{
+        font-size: 10vh;
+    }
+}
