@@ -15,7 +15,7 @@ Page de {{ animal.nom }}
         <li class="list-group-item">Race: {{ animal.race }}</li>
         <li class="list-group-item">Age: {{ animal.age }}</li>
         <li class="list-group-item">Description: {{ animal.description }}</li>
-        <li class="list-group-item">Courriel: {{ animal.courriel }}</li>
+        <li class="list-group-item">Courriel: <a href="mailto:{{ animal.courriel }}">{{ animal.courriel }}</a></li>
         <li class="list-group-item">Address: {{ animal.adresse }}</li>
         <li class="list-group-item">Ville: {{ animal.ville }}</li>
         <li class="list-group-item">Code postal: {{ animal.cp }}</li>
